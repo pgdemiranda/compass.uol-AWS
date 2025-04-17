@@ -7,6 +7,6 @@ select
     count(*) as quantidade_publicacoes
 from autor a
 inner join livro l on a.codautor = l.autor
-group by a.nome
+group by a.codAutor, a.nome
 order by quantidade_publicacoes desc
 limit 1
