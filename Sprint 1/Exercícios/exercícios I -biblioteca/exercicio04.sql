@@ -9,5 +9,5 @@ select
 	count(l.cod) as quantidade
 from autor a
 left join livro l on a.codAutor = l.autor
-group by a.nome
+group by a.nome, a.codAutor, a.nascimento
 order by a.nome

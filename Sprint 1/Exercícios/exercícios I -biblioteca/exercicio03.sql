@@ -3,7 +3,7 @@
 -- Ordenar as linhas pela coluna que representa a quantidade de livros em ordem decrescente.
 
 select
-	count(*) as quantidade,
+	count(l.cod) as quantidade,
 	ed.nome,
 	en.estado,
 	en.cidade

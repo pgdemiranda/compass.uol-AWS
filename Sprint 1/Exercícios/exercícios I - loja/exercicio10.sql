@@ -10,10 +10,10 @@
 
 select
 	vdo.nmvdd as vendedor,
-	sum(vda.qtd * vda.vrunt) AS valor_total_vendas,
-	round(sum(vda.qtd * vda.vrunt) * vdo.perccomissao / 100, 2) AS comissao
+	sum(vda.qtd * vda.vrunt) as valor_total_vendas,
+	round(sum(vda.qtd * vda.vrunt) * vdo.perccomissao / 100, 2) as comissao
 from tbvendedor vdo
-join tbvendas vda on vda.cdvdd = vdo.cdvdd
+left join tbvendas vda on vda.cdvdd = vdo.cdvdd
 where vda.status = 'Concluído'
 group by vdo.nmvdd
 order by comissao desc
