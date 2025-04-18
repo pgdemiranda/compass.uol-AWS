@@ -3,7 +3,7 @@
 </div>
 <h1 align="center">Apresentação</h1>
 
-Saudações. Me chamo **Pablo Gomes de Miranda** e esse é o meu repositório com as informações de toda a minha trajetória no **programa de bolsas da Compass UOL, trilha de Engenharia de Dados**. 
+Saudações. Me chamo **Pablo Gomes de Miranda** e esse é o meu repositório com as informações de toda a minha trajetória no **programa de bolsas da Compass UOL, trilha de Engenharia de Dados** contendo exercícios, desafios e informações das sprints. 
 
 Mais informações sobre mim:
 - Resido em **João Pessoa, Paraíba**;
@@ -11,7 +11,7 @@ Mais informações sobre mim:
 - Possuo experiência profissional como: 
     - **Cientista de Dados** na FUNETEC-PB, uma instituição de apoio à pesquisa e ensino dos institutos federais da Paraíba. Coleto e realizao a limpeza periódica de dados, monto painéis analíticos, preparo relatórios semanais para diferentes equipes, construo e mantenho modelos de Machine Learning pertinentes ao projeto em que participo;
     - Fui **Professor de História** no ensino fundamental e superior (ensinei História Antiga como prof. substituto na UFRN), então considero que tenho boas *soft skills* e mantenho bons relacionamentos interpessoais com o resto da equipe;
-- Meus hobbies incluem escutar música, jogos de tabuleiro, escrita de artigos e leitura e tradução de documentos antigos.
+- Meus hobbies incluem me exercitar, jogos de tabuleiro, leitura e tradução de documentos antigos e cozinhar.
 
 ## Sprints 
 1. [Sprint 1](/Sprint%201/README.md)
