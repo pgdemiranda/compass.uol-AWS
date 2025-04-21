@@ -131,15 +131,15 @@ Na segunda semana foi aprendido:
 6. A query do exercício 6 retorna o autor com maior números de livros publicados, contendo as colunas codautor, nome e quantidade_publicacoes:
 ![Evidência exercício6](./Exercícios/exercícios%20I%20-%20biblioteca/evidências/exercicio06.png)
 
-7. A consulta do exercício 7 retorna a lista dos autores com nenhum publicação, sendo apresentados em ordem crescente. **Esse foi o primeiro exercício que utilizei uma CTE (Common Table Expression)**, que no curso de SQL foi ensinado na seção de Sub Query, e a utilização de uma CTE facilitou bastante a formulação da consulta:
+7. A consulta do exercício 7 retorna a lista dos autores com nenhum publicação, sendo apresentados em ordem crescente. **Esse foi o primeiro exercício que utilizei uma subquery**, e a sua utilização facilitou bastante a formulação da consulta:
 ![Evidência exercício 7](./Exercícios/exercícios%20I%20-%20biblioteca/evidências/exercicio07.png)
 
 
 ## Exercícios I - Loja
-8. A query do exercício 8 lista o código e o nome do vendedor com o maior número de vendas concluídas, o resltado foi obtido com a ajuda de uma CTE:
+8. A query do exercício 8 lista o código e o nome do vendedor com o maior número de vendas concluídas, o resltado foi obtido com a ajuda de uma subquery:
 ![Evidência exercício 8](./Exercícios/exercícios%20I%20-%20loja/evidências/exercicio08.png)
 
-9. Aqui, a consulta do exercício 9 retornou com sucesso o código e o nome do produto mais vendido entre as datas requeridas, obtido com a ajuda de uma CTE, a cláusula LIMIT 1 e ordenação decrescente da quantidade de vendas:
+9. Aqui, a consulta do exercício 9 retornou com sucesso o código e o nome do produto mais vendido entre as datas requeridas, obtido com a ajuda de uma subquery, a cláusula LIMIT 1 e ordenação decrescente da quantidade de vendas:
 ![Evidência exercício 9](./Exercícios/exercícios%20I%20-%20loja/evidências/exercicio09.png)
 
 10. Essa consulta, a do exercício 10, retorna a comissão dos vendedores apresentadas de modo decrescente e arredondadas na segunda casa decimal. Foi uma consulta possível ao calcular a quantidade de vendas utilizando a função SUM para somar os valores da multiplicação dos valores unitários de cada venda pela quantidade, e a função ROUND para arredondar a soma desses valores multiplicados pelo percentual de comissão e divididos por 100 para obter a devida comissão:
