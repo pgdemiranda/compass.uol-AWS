@@ -32,9 +32,34 @@ Na segunda semana foi aprendido:
   - [Exercícios II - Extração de Dados](#exercícios-ii---extração-de-dados-1)
 - [Certificados](#certificados)
 
-# Desafio
+# [Desafio](./Desafio/)
+O desafio dessa sprint aconteceu em duas etapas: na primeira etapa fomos desafiados a normalizar uma base de dados, e mostrar os resultados da **modelagem relacional**; e na segunda etapa, utilizando as tabelas normalizadas na primeira etapa, realizar uma **modelagem dimensional**. A pasta desafio contém os arquivos `.sql` dos modelo relacional e do modelo dimensional, bem como os modelos lógicos de cada modelagem, dentro das respectivas pastas, de modo que o esquema da pasta se encontra dessa maneira:
 
-# Exercícios
+```
+Desafio
+├── concessionaria.sqlite
+├── etapa-1
+│   ├── modelo_relacional.png
+│   └── modelo_relacional.sql
+├── etapa-2
+│   ├── modelo_dimensional.png
+│   └── modelo_dimensional.sql
+└── README.md
+```
+Todas as evidências do desafio se encontram na própria pasta de [Evidências](./Evidências/):
+```
+Evidências/
+├── 1-concessionaria_inicial.png
+├── 2-amostra_1fn.png
+├── 3-amostra_2fn.png
+├── 4-amostra_3fn.png
+├── 5-amostra_views.png
+├── 6-amostra_fato_locacao.png
+└── 7-amostra_relacional_locacao.png
+```
+> De maneira geral considero esse foi um exercício bastante desafiador, pois busquei ir além do que foi requerido: apresentei modelos relacionais com normalizações em 1FN, 2FN e 3FN, o código para a inserção dos dados, além de um processamento dos dados de data e tempo utilizando o SQLite que eu desconhecia. Além da documentação oficial do SQLite, busquei informações noo [sqldocs](https://sqldocs.org/sqlite-database/sqlite-datetime/), no [sqlitetutorial](https://www.sqlitetutorial.net/sqlite-functions/sqlite-substr/), e no [geekforgeeks](https://www.geeksforgeeks.org/sqlite-date-and-time/). Considero o Desafio realizado.
+
+# [Exercícios](./Exercícios/)
 ## Exercícios I - Biblioteca
 
 1. Apresente a query para listar todos os livros publicados após 2014. Ordenar pela coluna cod, em ordem crescente, as linhas. Atenção às colunas esperadas no resultado final: cod, titulo, autor, editora, valor, publicacao, edicao, idioma.
@@ -111,7 +136,7 @@ Na segunda semana foi aprendido:
 
 [Arquivo CSV da Etapa 2](./Exercícios/exercícios%20II%20-%20extração%20de%20dados/etapa2.csv)
 
-# Evidências
+# [Evidências](./Evidências/)
 ## Exercícios I - Biblioteca
 1. Ao realizar a query do exercício 1, podemos observar que foi retornado com sucesso a lista e todos os livros publicados após 2014 ordenados em ordem crescente pela coluna cod e com todas as colunas esperadas:
 ![Evidência exercício 1](./Exercícios/exercícios%20I%20-%20biblioteca/evidências/exercicio01.png)
@@ -208,5 +233,5 @@ Os dados foram exportados tendo como delimitador o pipe "|". Da mesma maneira, t
 
 ![Evidência Etapa 2](./Exercícios/exercícios%20II%20-%20extração%20de%20dados/evidências/etapa2.png)
 
-# Certificados
+# [Certificados](./Certificados/)
 Não foi necessário apresentar nenhum certificado já que nessa Sprint não houve nenhum curso fora da Udemy.
