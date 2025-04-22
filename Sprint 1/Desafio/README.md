@@ -4,13 +4,25 @@
 [x] Explicação breve dos passos seguidos para a normalização;
 - No próprio `README.md`
 
-[ ] Arquivos `.sql`;
+[x] Arquivos `.sql`;
 - [modelo relacional](./etapa-1/modelo_relacional.sql)
+- [modelo dimensional](./etapa-2/modelo_dimensional.sql)
 
-[ ] Desenho da Modelagem Relacional após a normalização (modelo lógico);
+[x] Desenho da Modelagem Relacional após a normalização (modelo lógico);
 - [modelo lógico da modelagem relacional](./etapa-1/modelo_relacional.png)
 
-[ ] Desenho da Modelagem Dimensional (modelo lógico).
+[x] Desenho da Modelagem Dimensional (modelo lógico).
+- [modelo lógico da modelagem dimensional](./etapa-2/modelo_dimensional.png)
+
+## Sumário
+- [Desafio](#desafio)
+- [Etapa 1 - Normalizar Base de Dados](#etapa-1---normalização-da-base-de-dados)
+    - [Primeira Forma Normal (1FN)](#primeira-forma-normal-1fn)
+    - [Segunda Forma Normal (2FN)](#segunda-forma-normal-2fn)
+    - [Terceira Forma Normal (3FN)](#terceira-forma-normal-3fn)
+    - [Conclusão Modelagem Relacional](#conclusão-modelagem-relacional)
+- [Etapa 2 - Modelagem Dimensional](#etapa-2---modelagem-dimensional)
+    - [Conclusão Modelagem Dimensional](#conclusão-modelagem-dimensional)
 
 ## Desafio:
 Normalizar [esta base de dados](./concessionaria.sqlite), ou seja, aplicar as formas normais e depois converter o modelo relacional em modelo dimensional.
@@ -32,7 +44,7 @@ Esperamos que haja, minimamente:
 - Relacionamento com a pasta de evidências (imagens).
 
 
-### [Etapa 1 - Normalização da Base de Dados](./etapa-1/)
+# [Etapa 1 - Normalização da Base de Dados](./etapa-1/)
 
 Originalmente o banco de dados fornecido se encontra dessa maneira:
 
@@ -398,9 +410,149 @@ where tl.idLocacao is not null
 group by tl.idLocacao;
 ```
 
-# Etapa 2 - Modelo Dimensional Baseado no Modelo Relacional
+Abaixo uma amostra para visualizarmos os dados na tabela normalizada `locacao`:
+![amotra_locacao](../Evidências/7-amostra_relacional_locacao.png)
 
+# [Etapa 2 - Modelagem Dimensional](./etapa-2/)
+O modelo dimensional está disponível dentro da pasta etapa-2 como [modelo_dimensional.sql](./etapa-2/modelo_dimensional.sql)
 
+A modelagem dimensional foi realizada em cima da modelagem relacional, de forma que quando os dados foram inseridos da tabela original, a modelagem dimensional importou esses dados diretamente como **views**. No futuro, caso esse fosse um case real e o time de negócio precisasse, poderíamos materializar as views dimensão e fato como tabelas. As tabelas dimensão construídas foram `dim_data_locacao`, `dim_data_entrega`, `dim_cliente`, `dim_carro` e `dim_vendedor`, e a tabela fato `fato_locacao`.
 
+As views `dim_data_locacao` e `dim_data_entrega` foram particularmente difíceis de realizar, porque o formato das colunas dataLocacao e dataEntrega já se encontravam em formato `date`, mas não obedeciam nenhum comando de formatação ou extração. Em menor grau, as colunas horaLocacao e horaEntrega também se encontravam em formato `time` mas foi impossível realizar ações de concatenação para formar um `datetime`. Foi necessário um tempo considerável na documentação do SQLite para entender o problema. O problema foi resolvido realizando subqueries para limpar os dados no formato de string com a função `susbstr()` que funciona da maneira `substr( string, start, length )` e foi concatenada com hífens para enfim ficar no formato YYYY-MM-DD. No campo horas poderia haver uma incrongruência onde horas abaixo de 10:00 poderia ser registrado sem o primeiro dígito, exemplo: "08:00" e "8:00". O resto das views foram criadas com simples consultas e ocasionais `inner joins`.
 
+O código seguinte cria todas as views em conformidade com a modelagem relacional:
+```sql
+-- view dimensão data de locação
+create view dim_data_locacao as
+with datas_das_locacoes as (
+    select
+    	dataLocacao,
+    	horaLocacao,
+        substr(dataLocacao, 1, 4) || '-' || 
+        substr(dataLocacao, 5, 2) || '-' || 
+        substr(dataLocacao, 7, 2) AS data_formatada,
+        case when instr(horaLocacao, ':') = 2 
+             then '0' || horaLocacao 
+             else horaLocacao end as hora_formatada
+    from 
+        locacao
+)
+select 
+	dataLocacao,
+	horaLocacao,
+    data_formatada,
+    hora_formatada,
+    data_formatada || ' ' || hora_formatada || ':00' as data_hora_locacao,
+    strftime('%Y', data_formatada) as ano,
+    strftime('%m', data_formatada) as mes,
+    strftime('%d', data_formatada) as dia,
+    cast(strftime('%w', data_formatada) as integer) as dia_semana
+from 
+    datas_das_locacoes;
 
+-- view dimensão data de entrega
+create view dim_data_entrega as
+with datas_das_entregas as (
+    select
+    	dataEntrega,
+		horaEntrega,
+        dataEntrega,
+        horaEntrega,
+        substr(dataEntrega, 1, 4) || '-' || 
+        substr(dataEntrega, 5, 2) || '-' || 
+        substr(dataEntrega, 7, 2) as data_formatada,   
+        case 
+            when length(trim(horaEntrega)) = 4 then '0' || horaEntrega
+            else horaEntrega 
+        end as hora_formatada
+    from 
+        locacao
+)
+select
+	dataEntrega,
+	horaEntrega,
+    data_formatada,
+    hora_formatada,
+    data_formatada || ' ' || hora_formatada || ':00' as data_hora_entrega,
+    strftime('%Y', data_formatada) as ano,
+    strftime('%m', data_formatada) as mes,
+    strftime('%d', data_formatada) as dia,
+    cast(strftime('%w', data_formatada) as integer) as dia_semana
+from 
+    datas_das_entregas;
+
+-- view dimensão cliente
+create view dim_cliente as
+select 
+    c.idCliente as id_cliente,
+    c.nomeCliente as nome_cliente,
+    ci.nomeCidade as cidade_cliente,
+    e.nomeEstado as estado_cliente,
+    p.nomePais as pais_cliente
+from cliente c
+inner join cidade ci on c.idCidade = ci.idCidade
+inner join estado e on ci.idEstado = e.idEstado
+inner join pais p on e.idPais = p.idPais;
+
+-- view dimensão vendedor
+create view dim_vendedor as
+select 
+    v.idVendedor as id_vendedor,
+    v.nomeVendedor as nome_vendedor,
+    v.sexoVendedor as sexo_vendedor,
+    e.nomeEstado as estado_vendedor
+from vendedor v
+inner join estado e on v.idEstado = e.idEstado;
+
+-- view dimensão carro
+create view dim_carro as
+select 
+    car.idCarro as id_carro,
+    car.classiCarro as classi_carro,
+    car.marcaCarro as marca_carro,
+    car.modeloCarro as modelo_carro,
+    car.anoCarro as ano_carro,
+    comb.tipoCombustivel as tipo_combustivel,
+    d.vlrDiaria as valor_diaria
+from carro car
+inner join combustivel comb on car.idCombustivel = comb.idCombustivel
+inner join diaria d on car.idCarro = d.idCarro;
+
+-- view fato locacao
+create view fato_locacao as
+select 
+    l.idLocacao as id_locacao,
+    dc.id_cliente,
+    dca.id_carro,
+    dv.id_vendedor,
+    dca.valor_diaria,
+    l.qtdDiaria as qtd_diaria,
+    l.kmCarro as km_carro,
+    (l.qtdDiaria * dca.valor_diaria) as valor_total,
+    dl.data_hora_locacao,
+    de.data_hora_entrega,
+    dl.ano as ano_locacao,
+    dl.mes as mes_locacao,
+    dl.dia as dia_locacao,
+    dl.dia_semana as dia_semana_locacao,
+    de.data_hora_entrega - dl.data_hora_locacao as duracao_locacao_dias
+from locacao l
+inner join dim_data_locacao dl on l.dataLocacao = dl.dataLocacao and l.horaLocacao  = dl.horaLocacao
+inner join dim_data_entrega de on l.dataEntrega = de.dataEntrega and l.horaEntrega = de.horaEntrega
+inner join dim_cliente dc on l.idCliente = dc.id_cliente 
+inner join dim_carro dca on l.idCarro = dca.id_carro
+inner join dim_vendedor dv on l.idVendedor = dv.id_vendedor;
+```
+
+O resultado obtido com o código indica que todas as views foram criadas com sucesso, como observado na amostra abaixo:
+![amostra_views](../Evidências/5-amostra_views.png)
+
+Abaixo uma amostra demonstrando a inserção dos dados na view fato_locacao:
+![amostra_fato_locacao](../Evidências/6-amostra_fato_locacao.png)
+
+## Conclusão Modelagem Dimensional
+O modelo dimensional está disponível dentro da pasta etapa-2 como [modelo_dimensional.sql](./etapa-2/modelo_dimensional.sql)
+
+Abaixo está o modelo lógico gerado com a ajuda do editor DBeaver. O modelo lógico não aponta as relações entre as views, mas caso fossem materializadas as relações seriam também mostradas pelo editor.
+
+![modelo dimensional](./etapa-2/modelo_dimensional.png)
