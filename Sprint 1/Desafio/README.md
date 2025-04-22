@@ -31,18 +31,6 @@ Normalizar a [base de dados concessionaria](./concessionaria.sqlite), aplicando 
 
 **Etapa 2 - Modelo Dimensional baseado no Modelo Relacional**: praticar conceitos de Modelagem Dimensional estudado anteriormente. Considerar a base de dados [Concessionária](./concessionaria.sqlite), cujo modelo será criado na seção anterior de Modelagem Relacional. O desafio é montar o Modelo Dimensional com base no Modelo Relacional normalizado na seção anterior.
 
-**Dicas**:
-- Aplicar as técnicas aprendidas sob o modelo relacional, criar arquivos .sql com a criação das estruturas e elaborar um desenho explicativo do relacionamento
-- Criar views para as tabelas dimensão e fato com a nomenclatura dim_ e fato_
-- Tabela de dimensão tempo criar ano, mês, semana e dia baseado em cada data
-- Tabela fato é com valores inteiros (códigos), quantidades e datas
-
-Esperamos que haja, minimamente:
-
-- Passo a passo para obter o resultado entregue do desafio.
-- Trechos de códigos e suas explicações.
-- Relacionamento com a pasta de evidências (imagens).
-
 
 # [Etapa 1 - Normalização da Base de Dados](./etapa-1/)
 
@@ -553,6 +541,10 @@ Abaixo uma amostra demonstrando a inserção dos dados na view fato_locacao:
 ## Conclusão Modelagem Dimensional
 O modelo dimensional está disponível dentro da pasta etapa-2 como [modelo_dimensional.sql](./etapa-2/modelo_dimensional.sql)
 
-Abaixo está o modelo lógico gerado com a ajuda do editor DBeaver. O modelo lógico não aponta as relações entre as views, mas caso fossem materializadas as relações seriam também mostradas pelo editor.
+Abaixo está uma amostra cm oodelo lógico gerado com a ajuda do editor DBeaver. O modelo lógico não aponta as relações entre as views, porque não foi imposta uma restrição de chave primária (apesar dela estar ali)
+
+![modelo dimensional dbeaver](../Evidências/8-modelo_dimensional_sem_ligacao.png)
+
+Com a ajuda do site [draw.io](https://app.diagrams.net/) desenhamos o modelo dimensional com suas conexões, como consta abaixo:
 
 ![modelo dimensional](./etapa-2/modelo_dimensional.png)
