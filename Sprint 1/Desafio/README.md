@@ -1,18 +1,18 @@
 # Desafio da Sprint 1 - Modelagem de Dados Relacional e Dimensional com SQL
 
 ## Entregáveis:
-[x] Explicação breve dos passos seguidos para a normalização;
-- No próprio `README.md`
+- [x] Explicação breve dos passos seguidos para a normalização;
+    - No próprio `README.md`
 
-[x] Arquivos `.sql`;
-- [modelo relacional](./etapa-1/modelo_relacional.sql)
-- [modelo dimensional](./etapa-2/modelo_dimensional.sql)
+- [x] Arquivos `.sql`;
+    - [modelo relacional](./etapa-1/modelo_relacional.sql)
+    - [modelo dimensional](./etapa-2/modelo_dimensional.sql)
 
-[x] Desenho da Modelagem Relacional após a normalização (modelo lógico);
-- [modelo lógico da modelagem relacional](./etapa-1/modelo_relacional.png)
+- [x] Desenho da Modelagem Relacional após a normalização (modelo lógico);
+    - [modelo lógico da modelagem relacional](./etapa-1/modelo_relacional.png)
 
-[x] Desenho da Modelagem Dimensional (modelo lógico).
-- [modelo lógico da modelagem dimensional](./etapa-2/modelo_dimensional.png)
+- [x] Desenho da Modelagem Dimensional (modelo lógico).
+    - [modelo lógico da modelagem dimensional](./etapa-2/modelo_dimensional.png)
 
 ## Sumário
 - [Desafio](#desafio)
@@ -25,7 +25,7 @@
     - [Conclusão Modelagem Dimensional](#conclusão-modelagem-dimensional)
 
 ## Desafio:
-Normalizar [esta base de dados](./concessionaria.sqlite), ou seja, aplicar as formas normais e depois converter o modelo relacional em modelo dimensional.
+Normalizar a [base de dados concessionaria](./concessionaria.sqlite), aplicando as formas normais e depois utilizar o modelo relacional normatizado para criar views de dimensões e fato, o modelo dimensional. Documentar e explicar as etapas. Os entregáveis se encontram nas subpastas etapa-1 e etapa-2, e as evidências na pasta Evidência.
 
 **Etapa1 - Normalizar Base de Dados**: aplicar as formas Normais nas tabelas, criar arquivo .sql com a criação das estruturas e elaborar um desenho explicativo do relacionamento;
 
