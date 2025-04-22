@@ -263,9 +263,9 @@ O resultado obtido com o código indica que todas as tabelas foram criadas com s
 ![amostra_3NF](../Evidências/4-amostra_3fn.png)
 
 ## Conclusão Modelagem Relacional
-O modelo relacional está disponível dentro da pasta etapa-1 como [modelo_relacional.sql](./etapa-1/modelo_relacional.sql)
+O modelo relacional na 3fn está disponível dentro da pasta etapa-1 como [modelo_relacional.sql](./etapa-1/modelo_relacional.sql)
 
-Abaixo está o modelo lógico após a normalização das tabelas gerada com a ajuda do editor DBeaver. O modelo lógico aponta as relações entre as tabelas obedecendo a normalização aplicada obedecendo o princípio da atomicidade bem como o afastamento das dependências parciais e transitivas. A tabela `pais` está relacionada a tabela `estado`, que está relacionada a tabela `cidade` que por sua vez se relaciona tanto a tabela `cliente` e `vendedor`. A tabela `combustivel` se relacionada somente com a tabela `carro`. Por sua vez a tabela `locacao` se relaciona com as tabelas `cliente`, `vendedor`, `carro` e `diaria`.
+Abaixo está o modelo lógico após a normalização das tabelas gerada com a ajuda do editor DBeaver. O modelo lógico aponta as relações entre as tabelas obedecendo a normalização aplicada obedecendo o princípio da atomicidade bem como o afastamento das dependências parciais e transitivas. A tabela `pais` está relacionada a tabela `estado`, que está relacionada a tabela `cidade` e a tabela `vendedor`; A tabela `cidade` por sua vez se relaciona tanto a tabela `cliente` e `vendedor`. A tabela `combustivel` se relacionada somente com a tabela `carro`. Por sua vez a tabela `locacao` se relaciona com as tabelas `cliente`, `vendedor`, `carro` e `diaria`.
 
 ![modelo relacional](./etapa-1/modelo_relacional.png)
 
