@@ -1,9 +1,9 @@
-def imprimir_parametros(*args, **kwargs):
-    print("Parâmetros não nomeados (args):")
-
+def parametros(*args, **kwargs):
     for i, arg in enumerate(args, 1):
-        print(f"  Argumento {i}: {arg}")
+        print(f'{arg}')
 
-    print("\nParâmetros nomeados (kwargs):")
     for chave, valor in kwargs.items():
-        print(f"  {chave}: {valor}")
+        print(f'{valor}')
+
+
+parametros(1, 3, 4, 'hello', parametro_nomeado='alguma coisa', x=20)
