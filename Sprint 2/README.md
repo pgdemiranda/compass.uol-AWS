@@ -123,8 +123,90 @@ Jupyter notebook com as respostas das questões de ETL
 
 # Evidências
 ## Exercícios Python Básico
+1.
+
+2.
+
+3.
+
+4.
+
+5.
+
+6.
+
+7.
+
+8.
+
+9.
+
+10.
+
+11.
+
+12.
+
+13.
+
+14.
+
+
 ## Exercícios Python Avançado I
+15. As classes `Pato()` e `Pardal()` herdam da classe `Passaro` dois métodos, `voar()` e `emitir_som()`, e sobreescrevem o método `emitir_som()`. No final, a questão espera uma saída que instancia as duas classes Pato e Pardal, imprime no output uma sequência que inclui a saída da sobrescrição do método `emitir_som()`. A amostra abaixo mostra que o códgo passou em todos os testes:
+
+![amostra exercício 15](./Exercícios/avancado_I/evidencias/amostra-15.png)
+
+16. O código utiliza properties para criar um getter e um setter para o controle da classe Pessoa, protegendo o acesso ao atributo __nome, realizando validações mas sem alterar publicamente a interface. O código foi testado usando  o exemplo:
+
+```
+pessoa = Pessoa(0) 
+pessoa.nome = 'Fulano De Tal'
+print(pessoa.nome)
+```
+
+![amostra exercício 16](./Exercícios/avancado_I/evidencias/amostra-16.png)
+
+17. O código implementa uma classe `Cálculo` com dois métodos básicos simples de `adicao()` e de `subtracao()` imprimindo os resultados formatados. O output mostra que o código passou nos testes e rodou com as variáveis x e y fornecidas na questão:
+
+![amostra exercício 17](./Exercícios/avancado_I/evidencias/amostra-17.png)
+
+18. O código abaixo implementa uma classe chamada `Ordenadora` e que pode ser instanciada para ordenar uma lista de forma `crescente` através do método `ordenacaoCrescente` ou de forma `decrescente` através do método `ordenacaoDecrescente`. Abaixo uma amostra do código rodando com a testagem em positivo:      
+
+![amostra exercício 18](./Exercícios/avancado_I/evidencias/amostra-18.png)
+
+19. O código implementa uma classe `Aviao` que recebe os atributos  `modelo`, `velocidade_maxima` e `capacidade`, no qual o atributo cor seja sempre Azul. Ao receber uma lista de atributos, o código imprime no output os atributos em uma ordem requisitada na questão. Abaixo uma amostra do código rodando e passando pelo teste:
+
+![amostra exercício 19](./Exercícios/avancado_I/evidencias/amostra-19.png)
+
 ## Exercícios Python Avançado II
+20. O código abaixo lê um arquivo e armazena o conteúdo na variável linhas, o converte para inteiros e filtra apenas os números pares com a ajuda das funções `map()` e `filter()`. Em seguida, os números são colocados em ordem decrescente e apenas o top 5 é selecionado. No final, é disponibilizazdo a soma dos 5 maiores números pares e a somaa deles. A priori a grande dificuldade de fazer esse código passar pelos testes foi saber que o nome do arquivo é **number.txt**, o que só foi conseguido lendo o retorno no cconsole de testes, mas abaixo é possível examinar que o código volta com todos os testes funcionando:
+
+![amostra exercício 20](./Exercícios/avancado_II/evidencias/amostra-20.png)
+
+21. A função `conta_vogais()` filtra dentro de uma string quais letras são vogais: com a ajuda de uma função lambda e `filter()` e depois retorna essa seleção como lista usando a função `list()`, para daí retornar a quantidade de elementos dentro dessa lista com a função `len()`. A amostra abaixo mostra o código rodando e passando em todos os testes: 
+
+![amostra exercício 21](./Exercícios/avancado_II/evidencias/amostra-21.png)
+
+22. A função `calcula_saldo()` reduz cada produto ao seu preço utilizando a função `map()` e armazenando na variável valores e depois itera cada item somando os valores armazenados na variável valores com o próximo item com a ajuda da função importada `reduce()`, e o código é aprovado nos testes como pode ser observado abaixo:
+
+![amostra exercício 22](./Exercícios/avancado_II/evidencias/amostra-22.png)
+
+23. O código realiza diferentes operações com funções lambda e retorna o valor máximo dentre elas. As funções `map()` e `zip()` são usadas para aplicar as operações a cada par e combinar os operadores com seus pares de operandos, respectivamente. Por fim a função `max()` retorna o valor máximo. Abaixo nosso código roda passando por todos os testes:
+
+![amostra exercício 23](./Exercícios/avancado_II/evidencias/amostra-23.png)
+
+24. Esse foi um exercício difícil não pelo enunciado, mas pelos ajustes necessários para rodar nos testes. Foi requisitado uma listagem ordenada com o nome dos alunos, as três maiores notas listadas de maneira decrescente e a média dessas notas disponibilizada em até a segunda casa decimal. O resultado obtido era válido conforme os requisitos do enunciado da questão (ao utilizar todas as funções pedidas `round()`, `map()` e `sorted()`). Foi criada uma variável `notas_mod` e utilizando uma list comprehesion iteramos em cima da listagem das notas top 3 de cada aluno e convertemos para int todos os valores filtrados com a função `is_integer()` e arredondamos para uma casa decimal quem não fosse. A amostra abaixo mostra o código rodando e passando por todos os testes: 
+
+![amostra exercício 24](./Exercícios/avancado_II/evidencias/amostra-24.png)
+
+25. Para esse exercício, a função `maiores_que_media()` filtra e ordena produtos com preço acima da média de um dicionário chamado `conteudo`. Abaixo a amostra evidenciando os testes retornando como positivo para o código:
+
+![amostra exercício 25](./Exercícios/avancado_II/evidencias/amostra-25.png)
+
+26. Para o exercício a função `pares_ate(n:int)` gera números pares, iniciando do 2 até um número n (incluindo ele, daí o n + 1). Abaixo a amostra do exercício aprovado pelo teste:
+
+![amostra exercício 26](./Exercícios/avancado_II/evidencias/amostra-26.png)
 
 ## Exercícios Python ETL
 1. O enunciado da etapa 1 diz: "Apresente o ator/atriz com maior número de filmes e a respectiva quantidade. A quantidade de filmes encontra-se na coluna Number of movies do arquivo". O código desenvolvido abre e lê o arquivo **.csv** como uma lista de dicionário (gerando assim uma relação chave-valor), usa a função `max()` para retornar o valor máximo percorrido com uma função lambda na coluna 'Number of Movies'.
