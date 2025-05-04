@@ -30,7 +30,7 @@ O desafio dessa sprint foi em torno de Análise de Dados, envolvendo duas etapas
 
 Todas as evidências do desafio se encontra na própria pasta de [Evidências](./Evidências/)
 
-> Em termos de dificuldades, o desafio em si não foi complicado. Não envolve nenhum código complicado seja em Python puro ou nas suas bibliotecas. A dificuldade esteve no planejamento e na ausência de uma **Regra de Negócio**. A dificuldade desse Desafio esteve em avaliar quais dados são pertinentes, o que devemos informar, quais *insights* podem surgir de um dataset onde não sabemos quais dados podem ser retirados, ou como devem ser manipulados? O monitor dessa sprint foi EXEMPLAR ao discutir quais seriam as regras de negócio que poderíamos utilizar para o Desafio. 
+> Em termos de dificuldades, o desafio em si não foi complicado. Não envolve nenhum código complicado seja em Python puro ou nas suas bibliotecas. A dificuldade esteve no planejamento e na ausência de uma **Regra de Negócio**. A dificuldade desse Desafio esteve em avaliar quais dados são pertinentes, o que devemos informar, quais *insights* podem surgir de um dataset onde não sabemos quais dados podem ser retirados, ou como devem ser manipulados. O monitor dessa sprint foi EXEMPLAR ao discutir quais seriam as regras de negócio que poderíamos utilizar para o Desafio. 
 
 # Exercícios
 
