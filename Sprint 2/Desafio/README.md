@@ -1,9 +1,12 @@
 # Desafio da Sprint 2 - Análise de Dados
 
 ## Entregáveis
-- [] Arquivo no formato `.ipynb` contendo o código no modelo de Notebook, por exemplo Jupyter, com a **execução realizada**.
+- [x] Arquivo no formato `.ipynb` contendo o código no modelo de Notebook, por exemplo Jupyter, com a **execução realizada**.
+    - arquivo [desafio.ipynb](./desafio.ipynb) neste diretório Desafio.
 
-- [] Incluir células em **Markdown** (explicativas) com documentação de cada célula de código criado.
+- [x] Incluir células em **Markdown** (explicativas) com documentação de cada célula de código criado.
+    - Células em **Markdown** incluídas no notebook do desafio.
+    - Sempre que uma nova função surge no código, **providenciamos a documentação consultada**.
 
 ## Sumário
 
@@ -40,6 +43,9 @@ Na **segunda etapa** a solução foi desenvolvida seguindo uma série de etapas:
 ![amostra3-importacao](../Evidências/amostra3-import_bibliotecas.png)
 
 # [Etapa 2 - Desenvolvimento]
+
+> Antes de mais nada, em conversa com o monitor da sprint, combinamos uma regra de negócio: "Ao lidar com os aplicativos com o mesmo nome, devemos priorizar aquele que tiver um maior número de instalações".
+
 1. **Remova as linhas duplicadas**: os dados duplicados foram removidos com a ajuda da função drop_duplicates() sinalizando o inplace como True para que as mudanças sejam duradouras. O efeito dessa remoção foi acompanhada com a ajuda da função shape antes e depois do uso de drop_duplicates(), retornando uma tupla com as linhas e colunas do dataframe que contém os dados, e que a diferença nas linhas mostrou que a remoção foi realizada.
 
 Abaixo uma amostra com o retorno do código de cada célula, observar que antes do uso de drop_duplicates(), tínhamos 10841 linhas e depois ficamos com 10358 linhas:
