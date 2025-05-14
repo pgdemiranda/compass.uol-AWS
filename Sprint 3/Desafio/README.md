@@ -44,7 +44,7 @@ Para a **quarta etapa** vamos criar um arquivo **Dockerfile** para executar o sc
 
 Finalmente, na **quinta etapa** vamos criar um arquivo **docker-compose** para conectar os dois contêineres e rodar a aplicação completa utilizando um volume em uma pasta local criada especificamente para isso, o nome do diretório deve ser **/volume**. A execução do desafio deve ser somente pelo **docker-compose**.
 
-**ATENÇÂO**: a solução para as primeira e segunda etapa foram prototipadas em um **jupyter notebook**, que, apesar de não ser um entregável, também se encontra na pasta Desafio como [prototipagem.ipynb](prototipagem.ipynb).
+**ATENÇÂO**: a solução para as primeira e segunda etapas foram prototipadas em um **jupyter notebook**, que, apesar de não ser um entregável, também se encontra na pasta Desafio como [prototipagem.ipynb](prototipagem.ipynb).
 
 # Etapa 1
 
