@@ -1,12 +1,12 @@
 # Resumo da Sprint 3
 
-Como de costume, a Sprint 3 foi dividida em duas semanas, onde na primeira semana exploramos tópicos relacionados a Contêiner com a ferramenta Docker, aliado a orquestração com Docker Swarm e Kubernetes, além de Expressões Regulares (*Regex*) e serviços essenciais da AWS - Amazon Web Services.
+Como de costume, a *Sprint* 3 foi dividida em duas semanas, onde na primeira semana exploramos tópicos relacionados a Contêiner com a ferramenta Docker, aliado a orquestração com Docker Swarm e Kubernetes, além de Expressões Regulares (*Regex*) e serviços essenciais da AWS - Amazon Web Services.
 
-- **Docker**:
+- **Docker**: o curso de Docker foi extenso, versou sobre elementos basilares como comandos básicos, definições de imagens e contêiners, criação de diferentes tipos de redes e volumes. Além disso, houve lições sobre montagem de contêiners com Docker Compose, operações com Docker Swarm e Kubernetes.
 
-- **Expressões Regulares**
+- **Expressões Regulares**: fizemos uma revisão de expressões regulares que foi útil inclusive para o desafio dessa *Sprint*. Vimos como encontrar e filtrar caractéres de diferentes maneiras usando Python (mas o conhecimento adquirido pode ser aplicado em diferentes linguages de programação).
 
-- **AWS**: 
+- **AWS**: foi realizado dois cursos da AWS na plataforma [AWS Skill Builder](https://explore.skillbuilder.aws/learn): um dele estava na esteira do programa, o **AWS Partner Accreditation** que, por sua vez, pede que façamos o curso **AWS Technical Essentials** para dar prosseguimento no seu próprio conteúdo. O primeiro foi sobre a adoção dos serviços da AWS para as operações de cloud, e o segundo sobre os serviços essenciais da AWS (instâncias, contêiners, armazenamento de dados, redes, monitoramento, escalonamento de serviços, etc).
 
 # Sumário
 
@@ -23,7 +23,11 @@ Como de costume, a Sprint 3 foi dividida em duas semanas, onde na primeira seman
 
 O README.md, bem como os arquivos pertinentes ao Desafio se encontram na pasta [Desafio](./Desafio/)
 
+O desafio da *Sprint* 3 versou acerca de processos de limpeza e análise de dados e da conteinerização desses processos. Foi um desafio com dificuldades variadas: as etapas iniciais foram superadas unindo o conhecimento adquirido na *Sprint* passada com Python e algumas bibliotecas já conhecidas (Pandas para manipulação, Matplotlib e Seaborn para plotar gráficos), as etapas finais foram realizadas com o conhecimento adquiridos em Docker.
+
 Todas as evidências do desafio se encontra na própria pasta de [Evidências](./Evidências/)
+
+> Nós já temos experiência prévia em Docker e em serviços da AWS. No caso da AWS foi bom rever alguns conhecimentos que não temos muitas oportunidades de exercitar, como a adoção dos serviços desde o início em uma empresa, ou mesmo monitoramento dos serviços com Cloud Front. No caso de Docker, excetuando a última parte do desafio, a construção das imagens e contêineres foram realizadas sem problemas com Dockerfile. Na última parte do desafio utilizamos Docker Compose para a execução simultânea dos processos anteriores. Fizemos de duas maneiras: **o desafio não foi explícito** em dizer se queria ou não o uso dos Dockerfiles das etapas anteriores, mas por uma questão de segurança fizemos com a utilização dos Dockerfiles (e aqui aprendemos bastante, porque nunca havíamos feito antes), disponível na pasta [etapa-5](./Desafio/etapa-5/) e sem os Dockerfiles, disponível na [etapa-5_alternativa](./Desafio/etapa-5_alternativa/).
 
 # Exercícios
 
@@ -144,3 +148,9 @@ Adicionalmente, a amostra seguinte traz o código rodando à partir do contêine
 ![amostra2-run](./Exercícios/etapa-2/evidencias/amostra2-run.png)
 
 # Certificados
+
+Abaixo se encontram dois certificados nominais a Pablo Miranda de cursos da plataforma [AWS Skill Builder](https://explore.skillbuilder.aws/learn), um é parte dos cursos requeridos para essa *Sprint*, o AWS Partner Accreditation, e o outro é parte do curso anterior, de modo que foi necessário finalizar ele também, o AWS Technical Essentials. Ambos os certificados se encontram na pasta de [Certificados](./Certificados/): 
+
+- [AWS Partner Accreditation](./Certificados/aws_accreditation.pdf)
+
+- [AWS Technical Essentials](./Certificados/aws_technical_essentials.pdf)
