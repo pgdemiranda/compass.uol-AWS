@@ -1,0 +1,22 @@
+services:
+  etl:
+    build:
+      context: ../etapa-3
+      dockerfile: Dockerfile
+    volumes:
+      - ./volume:/app/volume
+    command: python3 etl.py
+
+  job:
+    build:
+      context: ../etapa-4
+      dockerfile: Dockerfile
+    depends_on:
+      etl:
+        condition: service_completed_successfully
+    volumes:
+      - ./volume:/app/volume
+    command: python3 job.py
+
+volumes:
+  volume:
