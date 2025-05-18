@@ -1,0 +1,12 @@
+Q1: 
+
+--- A artista que mais aparece nessa lista e possui a maior média de seu faturamento bruto é Taylor Swift
+
+Q2: 
+
+--- Das turnês que aconteceram dentro de um ano, qual a turnê com a maior média de faturamento bruto é Renaissance World Tour
+
+Q3: 
+
+--- As três turnês que tiveram os shows mais lucrativos foram: The Eras Tour de Taylor Swift, com o show unitário avaliado em US$13928571.43, Renaissance World Tour de Beyoncé, com o show unitário avaliado em US$10353571.43, e Reputation Stadium Tour de Taylor Swift, com show unitário avaliado em US$7600846.21.
+
