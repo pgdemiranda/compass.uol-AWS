@@ -152,13 +152,13 @@ Documentação e Links consultados para a solução usando `split`:
 
 5. O Dataframe foi exportado como um arquivo csv e se encontra na pasta desta etapa como [csv_limpo.csv](./etapa-1/csv_limpo.csv).
 
-A amostra à seguir traz o código sendo rodado, realizando os tratamentos necessários e exportando o arquivo em csv:
+Na amostra à seguir ativamos o ambiente virtual com o uso do gerenciador de ambientes e bibliotecas **conda**, examinamos a pasta da etapa e conferimos que o arquivo final não está presente. Rodamos o script **etl.py**, que realiza os tratamentos necessários e exporta o arquivo em csv, que no final se encontra no nosso diretório.:
 
-![amostra1-etl_rodando](../Evidências/amostra1-etl_rodando.png)
+![amostra-1_etl](../Evidências/amostra-1_etl.png)
 
 Abaixo o arquivo csv_limpo.csv aberto com o **software** Libre Calc:
 
-![amostra2-csv_limpo](../Evidências/amostra2-csv_limpo.png)
+![amostra2-csv_limpo](../Evidências/amostra-2_csv_limpo.png)
 
 ## Etapa 2
 
@@ -260,6 +260,19 @@ As três questões foram exportadas em um arquivo **respostas.txt** e organizada
 
 No script **job.py**, usamos a função `savefig` para salvar as figuras com título Q4 e Q5, setamos a qualidade para 300 dpi e **bbox_inches** como 'tight' para que a imagem não tivesse espaços em brancos desnecessários ao redor.
 
+Na amostra abaixo trazemos o nosso diretório antes e depois de rodar o script, mostrando que os arquivos se encontram na pasta após sua execução:
+
+![amostra-3_job](../Evidências/amostra-3_job.png)
+
+A amostra à seguir mostra o arquivo obtido **respostas.txt** no formato requerido:
+
+![amostra-4_respostas](../Evidências/amostra-4_respostas.png)
+
+Por fim, as próximas duas amostras trazem os gráficos exportados com o script, um gráfico em linhas e um gráfico de barras horizontais:
+
+![amostra-5_q4](../Evidências/amostra-5_q4.png)
+
+![amostra-6_q5](../Evidências/amostra-6_q5.png)
 
 ## Etapa 3
 
@@ -283,7 +296,15 @@ VOLUME /app/volume
 CMD ["python3", "etl.py"]
 ```
 
-No terminal, utilizamos o comando `docker build -t etl .` para construir a imagem à partir do **Dockerfile** e, em seguida, rodamos o contêiner e montamos o volume localmente com `docker run -v ./volume:/app/volume etl`.
+No terminal, utilizamos o comando `docker build -t etl .` para construir a imagem à partir do **Dockerfile**, que importa os arquivos necessários e instala o requerimento necessário, processo registrado nas próximas duas amostras que trazem a construção da imagem sem encontrar nenhum erro e, adicionalmente, é possível notar que antes desse processo, não há nenhum volume montado ou o arquivo final presente:
+
+![amostra-7_build_etl](../Evidências/amostra-7_build_etl.png)
+
+![amostra-8_build_etl](../Evidências/amostra-8_build_etl2.png)
+
+Em seguida, rodamos o contêiner e montamos o volume localmente com `docker run -v ./volume:/app/volume etl`. Novamente, o diretório volume não foi requerido para essa etapa, mas foi uma maneira encontrada para mostrar que o resultado foi obtido satisfatoriamente. Em seguida recuperamos o conteúdo do diretório volume com o comando `tree` que mostra a presença do arquivo **csv_limpo.csv**.
+
+![amostra-9_resultado_etl](../Evidências/amostra-9_resultado_etl.png)
 
 ## Etapa 4
 
@@ -308,9 +329,24 @@ CMD ["python3", "job.py"]
 
 ```
 
-Com o comando `docker build -t job .` nós construímos a imagem à partir do **Dockerfile** e, em seguida, rodamos o contêiner e montamos o volume localmente com `docker run -v ./volume:/app/volume job`.
+De modo parecido ao da etapa anterior, no terminal, utilizamos o comando `docker build -t job .` para construir a imagem à partir do **Dockerfile**, que importa os arquivos necessários e instala os requerimento necessários. Esse processo é visto nas próximas duas amostras que trazem a construção da imagem sem encontrar nenhum erro e, adicionalmente, é possível notar que antes desse processo, não há nenhum volume montado ou o arquivo final presente:
+
+![amostra-10_build_job](../Evidências/amostra-10_build_job.png)
+
+![amostra-11_build_job2](../Evidências/amostra-11_build_job2.png)
+
+Logo após isso, rodamos o contêiner e montamos o volume localmente com `docker run -v ./volume:/app/volume job`. Mais uma vez, o diretório volume não foi requerido para essa etapa, mas foi uma maneira encontrada para mostrar que o resultado foi obtido. Em seguida recuperamos o conteúdo do diretório volume com o comando `tree` que mostra a presença dos arquivos requisitados. Todos esse processo pode ser encontrado à seguir:
+
+![amostra-12](../Evidências/amostra-12_resultado_job.png)
+
 
 ## Etapa 5
+
+Para a última etapa, construímos um arquivo docker-compose que pudesse, simultaneamente (como requisitado pelo desafio) lançar os contêiners e as tarefas dos scripts de etl e job das etapas 1 e 2. **Nunca havíamos feito essa tarefa em docker-compose à partir de diferentes Dockerfile** e ficamos satisfeitos com o resultado. Como toda a estrutura já havia sido montado anteriormente nos respectivos diretórios, aqui só criamos o arquivo [docker-compose.yml](./etapa-5/docker-compose.yml) e entregamos as coordenadas dos Dockerfiles de cada tarefa, montamos os volumes e os comandos a ser realizados e sinalizamos que o serviço de **job** só aconteceria se e quando o serviço de **etl** fosse completado com sucesso. Esse é um jeito muito **elegante** de realizar a tarefa.
+
+**ATENÇÃO** é necesśario fazer uma observação rápida, pois houve uma alteração no I/O dos arquivos de script **etl.py** e **job.py**: como o primeiro script leu o arquivo csv inicial no diretório de trabalho, realizou o serviço de limpeza e exportou o arquivo limpo para a pasta volume, que é compartilhada entre contêiners, o segundo serviço teve que pegar o arquivo limpo nessa pasta e exportar para ela o arquivo das respostas e os dois gráficos, de modo que esse pequeno ajuste de onde eles vão ler e onde vão salvar os arquivos foi necessário.
+
+O arquivo docker-compose.yml ficou da seguinte maneira:
 
 ```yaml
 services:
@@ -337,12 +373,25 @@ volumes:
   volume:
 ```
 
-docker compose up --build
 
-docker compose up
+De maneira semelhante verificamos apenas a presença do arquivo do docker-compose no diretório. Construímos a iamgem e rodamos os contêiners com docker-compose com `docker compose up --build` e, em seguida, usamos o comando `tree` para verificar a construção do diretório volume com os arquivos requisitados (se após isso, quisermos apenas rodar os contêiners, usamos `docker compose up`). As amostras seguintes trazem esse processo e demonstram o sucesso do processo:
+
+![amostra-13_build_compose](../Evidências/amostra-13_build_compose.png)
+
+![amostra-14_build_compose2](../Evidências/amostra-14_build_compose2.png)
 
 ## Etapa 5 (Alternativa)
 
+Uma alternativa, semelhante ao que já fizemos em outros projetos, foi o de recriar todo o processo com docker-compose. Estamos mais acostumados com essa solução por duas razões:
+
+1. se modificarmos qualquer um dos componentes nos diretórios das etapas anteriores, o docker-compose não vai conseguir terminar a construção da imagem ou o processo das tarefas vai falhar (pode haver erros de importação, execução, instalação ou mesmo de comunicação entre os contêiners);
+
+2. um projeto pode não começar com Dockerfiles e escalar para vários contêiners funcionando em paralelo com diferentes serviços, ele já pode ser planejado dessa maneira desde o início. Se existir uma demanda na arquitetura da solução, não há razão para não planejar o uso de docker-compose desde o início (e isso é mais fácil de enxergar de antemão quando há um objetivo claro, ou em um contexto de projeto de estudos ou de portifólio).
+
+Essencialmente o que fizemos foi importar para dentro dos contêiners os arquivos necessários para o trabalho de cada contêiner. No caso do primeiro serviço, o **etl**, importamos o script, o arquivo csv inicial (que vai ser limpo nesse trabalho), um arquivo de requirements a ser instalado e o volume. O conjunto de comandos precisa ser passado explicitamente, como a imagem base `image: python:3.13.3-alpine` não possui bash instalado, o comando é sinalizado para rodar no **shell** como **comando** com `sh -c`. O serviço de **job** é arquitetado de maneira semelhande, passamos a mesma condição para rodar apenas quando o serviço anterior tiver êxito, mas só precisamos importar o script e os requirements, além de apontar a criação do volume, porque o csv_limpo.csv vai ser entregue justamente pelo serviço anterior. Como são dois contâiners que realizam tarefas diferentes e que dependem de bibliotecas diferentes, reparem que preparamos dois requirements diferentes, o **requirements_etl.txt** e o **requirements_job.txt**, mas que ao ser importados para seus devidos contêiners são renomeados como **requirements.txt**, evitando que eles tenham um tamanho maior que o necessário por instalação de bibliotecas que sejam desnecessárias para as suas tarefas. O resultado é o mesmo apresentado no outro modelo da Etapa 5. 
+
+O arquivo do docker-compose.yml ficou da seuginte maneira:
+ 
 ```yaml
 services:
   etl:
@@ -381,6 +430,8 @@ volumes:
 
 ```
 
-docker compose up --build
+De maneira parecida ao feito na Etapa 5, consultamos o conteúdo do diretório, que dessa vez trouxe todos os vários arquivos necessários para essa etapa. Construímos a iamgem e rodamos os contêiners com docker-compose com `docker compose up --build` e, em seguida, com o comando `tree` verifica-se a construção do diretório volume com os arquivos que foram pedidos. As amostras seguintes trazem esse processo e demonstram o sucesso do processo:
 
-docker compose up
+![amostra-15_build_compose_alternativo](../Evidências/amostra-15_build_compose_alternativo.png)
+
+![amostra-16_build_compose_alternativo2](../Evidências/amostra-16_build_compose_alternativo2.png)
