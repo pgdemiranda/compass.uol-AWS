@@ -1,0 +1,44 @@
+Etapa 1: Criar um bucket
+- Acessamos o serviço S3, criamos um bucket com o nome pgdem-compass e nos certificamos que estávamos na região us-east-1.
+
+Etapa 2: Habilitar hospedagem de site estático
+- Nas propriedades do bucket selecionamos "Static Website Hosting" e selecionamos a opção para opção para hospedagem de site.
+- No campo de Index document, selecionamos index.html e no campo Error document, selecionamos 404.html e salvamos as mudanças.
+- Separamos o endpoint fornecido.
+
+Etapa 3: Editar as configurações do Bloqueio de acesso público
+- No bucket que foi criado, selecionamos a aba Permissions. Aqui, editamos a opção Block public access e desmarcamos todos os bloqueios.
+
+Etapa 4: Adicionar política de bucket que torna o conteúdo do bucket publicamente disponível
+- Na aba Permissions, editamos a Bucket Policy passando a seguinte política (adicionamos o nome do bucket em Resource):
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "PublicReadGetObject",
+                "Effect": "Allow",
+                "Principal": "*",
+                "Action": [
+                    "s3:GetObject"
+                ],
+                "Resource": [
+                    "arn:aws:s3:::pgdm-compass/*"
+                ]
+            }
+        ]
+    }
+
+Etapa 5: Configurar um documento de índice
+- O documento de índice já foi entregue para nós como index.html e já configuramos seu nome no campo Index document como index.html .
+- Na aba Objects fizemos o upload do arquivo index.html e da pasta dados com o arquivo nomes.csv .
+
+Etapa 6: Configurar documento de erros
+- O documento de erro foi formulado rapidamente e se encontra no diretório como 404.html.
+- Fizemos o upload do arquivo na pasta object, sendo reconhecido como documento de erro porque foi sinalizado na Etapa 2 no campo Error document.
+Depois de habilitar a hospedagem de sites estáticos para seu bucket, faça upload para o bucket de um arquivo HTML para notificação de erros.  Veja quais são os passos:
+
+Etapa 7: Testar o endpoint do site
+- Na aba Properties copiamos o endpoint fornecido e testamos no navegador. 
+- O site abre o Documento de índice e o arquivo csv é baixado com sucessoa. 
+- Se entramos um diretório que não existe (como data ao invés de dados), o Documento de erro é exibido.
