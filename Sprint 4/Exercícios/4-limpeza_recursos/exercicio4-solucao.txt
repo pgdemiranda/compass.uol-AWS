@@ -1,0 +1,5 @@
+Após concluir todas as etapas dos laboratórios e de colher todas as evidências/códigos para colocar no seu GitHub, você deve realizar a limpeza do que foi criado, para não incorrer em custos desnecessários.
+
+Lembre-se de:
+
+    Excluir os arquivos usados/gerados durante os laboratórios do S3 
