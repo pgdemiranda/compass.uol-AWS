@@ -1,0 +1,63 @@
+Etapa 1: Criar a função do Lambda
+- Selecionamos criar uma função do zero (from scratch), passando o valor "conta_linhas" como Function name, e para Runtime escolhemos Python 3.9, conforme orientado na trilha.
+
+Etapa 2: Construir o código
+- O código construído para a função do Lambda foi fornecida pela trilha e se encontra abaixo, essencialmente ele recupera o arquivo "nomes.csv" e conta as linhas do arquivo:
+
+```
+import json
+import pandas
+import boto3
+ 
+ 
+def lambda_handler(event, context):
+    s3_client = boto3.client('s3')
+ 
+    bucket_name = 'pgdm-compass'
+    s3_file_name = 'dados/nomes.csv'
+    objeto = s3_client.get_object(Bucket=bucket_name, Key=s3_file_name)
+    df=pandas.read_csv(objeto['Body'], sep=',')
+    rows = len(df.axes[0])
+ 
+    return {
+        'statusCode': 200,
+        'body': f"Este arquivo tem {rows} linhas"
+    }
+```
+
+- Contudo, após realizar o teste, recebemos o erro abaixo justamente porque o serviço Lambda não possui instalado a biblioteca Pandas:
+
+{
+  "errorMessage": "Unable to import module 'lambda_function': No module named 'pandas'",
+  "errorType": "Runtime.ImportModuleError",
+  "requestId": "",
+  "stackTrace": []
+}
+
+Etapa3: Criar uma Layer
+- Criamos um contêiner para instalar a biblioteca Pandas à partir de um Dockerfile que cria uma imagem utilizando o amazonlinux como base. Os comandos utilizados foram:
+`docker build -t amazonlinuxpython39 .` para construir à partir do Dockerfile e `docker run -it amazonlinuxpython39 bash` para rodar o contêiner.
+- Dentro do contêiner criamos uma série de diretórios, instalamos Pandas, zipamos o diretório com a biblioteca
+
+cd ~/
+mkdir layer_dir
+cd layer_dir/
+mkdir python
+cd python/
+pip3 install pandas -t .
+cd ..
+zip -r minha-camada-pandas.zip .
+
+- Em outra aba, procuramos saber o ID do contêiner com o comando `docker container ls` e descobrimos o ID como f09be2da7e98.
+- Exportamos o arquivo .zip com `docker cp f09be2da7e98:/root/layer_dir/minha-camada-pandas.zip ./`.
+- Subimos o arquivo minha-camada-pandas.zip para o bucket que utilizamos até agora em um novo diretório chamado layers
+- Voltamos para o serviço AWS Lambda, selecionamos o botão de Layers no menu lateral, Create Layer: demos o nome de PandasLayer, a URL do arquivo na S3, x86_64 em Compatible architecture e Python 3.9 em Runtime.
+
+Etapa 4: Utilizando a Layer
+- Selecionamos a aba de Layers na função Lambda criada e adicionamos a Custom Layer criada selecionando PandasLayer, versão 1.
+- Recebemos um erro de tempo de execução, então modificamos a configuração geral do Lambda: trocamos Memory de 128 para 256 e Timeout de 3 para 30 segundos.
+- Ao rodarmos o teste na aba Test, recebemos a mensagem de sucesso e o output:
+{
+  "statusCode": 200,
+  "body": "Este arquivo tem 1825433 linhas"
+}

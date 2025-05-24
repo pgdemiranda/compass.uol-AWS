@@ -10,6 +10,9 @@ Etapa 1: Configurar Athena
 Etapa 2: Criar um banco de dados
 - No editor rodamos a query `CREATE DATABASE meubanco` e selecionamos o banco meubanco no campo Database.
 
+Etapa 3: Criar uma tabela
+- Importamos os dados do arquivo nome.csv com a query abaixo, modificada à partir de um template disponibilizado pela trilha:
+
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS meubanco.nomes (
     nome STRING,
@@ -27,16 +30,14 @@ STORED AS TEXTFILE
 LOCATION 's3://pgdm-compass/dados/';
 ```
 
-- Definimos todos os campos no conjunto de dados e demos a eles um tipo apropriado.
-Informamos ao Athena para usar o analisador LazySimpleSerDe CSV. Usamos esse analisador porque ele permite valores nulos para números. 
-Ele não suporta valores entre aspas.
-Informamos ao analisador que os campos são delimitados por vírgulas e que a primeira linha contém nomes de campos que podem ser ignorados. -> EU QUE TIVE QUE ADICIONAR ISSO!
+- Basicamente criamos uma tabela externa chamada "nomes", o Serializador/Deserializador ajustado como LazySimpleSerDe para a permissão de valores nulos.
+- Definimos todos os campos no conjunto de dados e demos a eles um tipo apropriado. As propriedades do Seiralizador/Deserializador são: "," para escrever e ler os dados, além de pular o cabeçalho.
+- Nos foi requisitados testar os dados com a seguinte consulta, substituindo o nome dos campos, banco de dados e tabela pelos nomes que criamos anteriormente:
+    - A query requisitada: `select nome from nomedobanco.nomedatabela where ano = 1999 order by total limit 15;`
+    - A query modificada por nós: `select nome from meubanco.nomes where ano = 1999 order by total limit 15;`
 
-- Teste os dados com a seguinte consulta, substituindo o nome dos campos, banco de dados e tabela pelos nomes que você criou anteriormente:
-    - `select nome from nomedobanco.nomedatabela where ano = 1999 order by total limit 15;`
-    - `select nome from meubanco.nomes where ano = 1999 order by total limit 15;`
+- Por fim, foi pedido que criássemos uma consulta que listasse os 3 nomes mais usados em cada década desde o 1950 até hoje:
 
-- Crie uma consulta que lista os 3 nomes mais usados em cada década desde o 1950 até hoje:
 ```
 with contagem as (
     select 
