@@ -1,5 +1,10 @@
-Após concluir todas as etapas dos laboratórios e de colher todas as evidências/códigos para colocar no seu GitHub, você deve realizar a limpeza do que foi criado, para não incorrer em custos desnecessários.
+Após a conclusão das etapas anteriores, limpamos todos os recursos criados:
+1. S3:
+    - Esvaziamos e apagamos o bucket.
 
-Lembre-se de:
+2. Athena
+    - Realizamos o drop table que havíamos criado;
+    - As queries foram apagadas junto com o bucket.
 
-    Excluir os arquivos usados/gerados durante os laboratórios do S3 
+3. Lambda
+    - Apagamos a "PandasLayer" e então a função "conta_linhas"

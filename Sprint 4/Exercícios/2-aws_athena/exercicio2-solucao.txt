@@ -1,0 +1,66 @@
+Etapa 1: Configurar Athena
+- O bucket "pgdm-compass" será aproveitado do exercício anterior
+- Exploramos localmente o arquivo nomes.csv utilizando um Jupyter Notebook e obtivemos:
+    - Dimensão: 1825433 linhas e 4 colunas;
+    - Nome das colunas: 'nome', 'sexo', 'total' e 'ano';
+    - Tipos dos dados: nome object, sexo object, total int64 e ano int64.
+- Criamos um diretório chamado "queries" no bucket, a ser usado pelo Athena. 
+- Configuramos o O AWS Athena usará esta pasta para armazenar as consultas executadas, passando o endereço do bucket como "s3://pgdm-compass/queries".
+
+Etapa 2: Criar um banco de dados
+- No editor rodamos a query `CREATE DATABASE meubanco` e selecionamos o banco meubanco no campo Database.
+
+Etapa 3: Criar uma tabela
+- Importamos os dados do arquivo nome.csv com a query abaixo, modificada à partir de um template disponibilizado pela trilha:
+
+```
+CREATE EXTERNAL TABLE IF NOT EXISTS meubanco.nomes (
+    nome STRING,
+    sexo STRING,
+    total INT,
+    ano INT
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+     'serialization.format' = ',',
+     'field.delim' = ',',
+     'skip.header.line.count' = '1'
+)
+STORED AS TEXTFILE
+LOCATION 's3://pgdm-compass/dados/';
+```
+
+- Basicamente criamos uma tabela externa chamada "nomes", o Serializador/Deserializador ajustado como LazySimpleSerDe para a permissão de valores nulos.
+- Definimos todos os campos no conjunto de dados e demos a eles um tipo apropriado. As propriedades do Seiralizador/Deserializador são: "," para escrever e ler os dados, além de pular o cabeçalho.
+- Nos foi requisitados testar os dados com a seguinte consulta, substituindo o nome dos campos, banco de dados e tabela pelos nomes que criamos anteriormente:
+    - A query requisitada: `select nome from nomedobanco.nomedatabela where ano = 1999 order by total limit 15;`
+    - A query modificada por nós: `select nome from meubanco.nomes where ano = 1999 order by total limit 15;`
+
+- Por fim, foi pedido que criássemos uma consulta que listasse os 3 nomes mais usados em cada década desde o 1950 até hoje:
+
+```
+with contagem as (
+    select 
+        nome,
+        (floor(ano / 10) * 10) as decada,
+        sum(total) as resultado
+    from meubanco.nomes
+    where ano >= 1950
+    group by nome, (floor(ano / 10) * 10)
+),
+ranqueamento as (
+    select
+        nome,
+        decada,
+        resultado,
+        row_number() over (partition by decada order by resultado desc) as posicao
+    from contagem
+)
+select
+    nome,
+    decada,
+    resultado as total
+from ranqueamento
+where posicao <= 3
+order by decada, total desc;
+```
