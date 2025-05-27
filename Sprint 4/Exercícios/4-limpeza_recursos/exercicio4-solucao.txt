@@ -3,7 +3,8 @@ Após a conclusão das etapas anteriores, limpamos todos os recursos criados:
     - Esvaziamos e apagamos o bucket.
 
 2. Athena
-    - Realizamos o drop table que havíamos criado;
+    - Realizamos o drop table na tabela que havíamos criado;
+    - Realizamos o drop database do banco que havíamos criado;
     - As queries foram apagadas junto com o bucket.
 
 3. Lambda

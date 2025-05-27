@@ -54,7 +54,7 @@ zip -r minha-camada-pandas.zip .
 - Voltamos para o serviço AWS Lambda, selecionamos o botão de Layers no menu lateral, Create Layer: demos o nome de PandasLayer, a URL do arquivo na S3, x86_64 em Compatible architecture e Python 3.9 em Runtime.
 
 Etapa 4: Utilizando a Layer
-- Selecionamos a aba de Layers na função Lambda criada e adicionamos a Custom Layer criada selecionando PandasLayer, versão 1.
+- Selecionamos o botão Add a Layer na função Lambda criada e adicionamos a Custom Layer criada selecionando PandasLayer, versão 1.
 - Recebemos um erro de tempo de execução, então modificamos a configuração geral do Lambda: trocamos Memory de 128 para 256 e Timeout de 3 para 30 segundos.
 - Ao rodarmos o teste na aba Test, recebemos a mensagem de sucesso e o output:
 {

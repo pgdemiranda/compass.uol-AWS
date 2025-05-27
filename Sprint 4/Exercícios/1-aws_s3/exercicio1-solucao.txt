@@ -11,24 +11,24 @@ Etapa 3: Editar as configurações do Bloqueio de acesso público
 
 Etapa 4: Adicionar política de bucket que torna o conteúdo do bucket publicamente disponível
 - Na aba Permissions, editamos a Bucket Policy passando a seguinte política (adicionamos o nome do bucket em Resource):
-
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "PublicReadGetObject",
-                "Effect": "Allow",
-                "Principal": "*",
-                "Action": [
-                    "s3:GetObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::pgdm-compass/*"
-                ]
-            }
-        ]
-    }
-
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::pgdm-compass/*"
+            ]
+        }
+    ]
+}
+```
 Etapa 5: Configurar um documento de índice
 - O documento de índice já foi entregue para nós como index.html e já configuramos seu nome no campo Index document como index.html .
 - Na aba Objects fizemos o upload do arquivo index.html e da pasta dados com o arquivo nomes.csv .
