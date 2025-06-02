@@ -19,9 +19,15 @@ A *Sprint* 4 foi dividida em duas semanas, onde na primeira semana recebemos ins
 
 # Desafio
 
+O desafio dessa sprint se dividiu em três estapas, onde na primeira tivemos que selecionar um dataset original para trabalhar e realizar o upload desse dataset para o nosso bucket, para em uma etapa posterior realizar uma série de manipulações e daí salvar esse dataset resultante também no nosso bucket. O desafio foi realizado sem maiores problemas, aproveitamos a documentação providenciada pela AWS sobre **AWS CLI** e **Boto3** para a construção da infraestrutura e envio dos arquivos.
+
 O README.md, bem como os arquivos pertinentes ao Desafio se encontram na pasta [Desafio](./Desafio/)
 
 Todas as evidências do desafio se encontra na própria pasta de [Evidências](./Evidências/)
+
+- Documentação da AWS Cli: https://docs.aws.amazon.com/cli/
+
+- Documentação da biblioteca Boto3: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 
 # Exercícios
 
