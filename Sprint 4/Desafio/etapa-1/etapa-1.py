@@ -34,7 +34,7 @@ try:
     s3.head_bucket(Bucket=bucket_name)
     print(f'Bucket encontrado')
 
-    df.to_csv(
+    df_raw.to_csv(
         f's3://{bucket_name}/anuario-2024-dados_abertos-tabela2-19.csv',
         storage_options={
             'key': access_key,
