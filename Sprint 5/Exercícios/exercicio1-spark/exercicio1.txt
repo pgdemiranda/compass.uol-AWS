@@ -1,0 +1,28 @@
+- etapa 1: pull da imagem jupyter/all-spark-notebook
+docker pull jupyter/all-spark-notebook
+
+- etapa 2: build do contêiner com porta 8888 exposta
+docker run -it -p 8888:8888 jupyter/all-spark-notebook
+
+- etapa 3: descobrir o ID do contêiner e iniciar o shell do pyspark
+docker ps
+docker exec -it <ID> pyspark
+
+- etapa 4: sequência no shell
+from pyspark.sql import SparkSession
+
+from pyspark.sql.functions import explode, split, col, lower, trim
+
+spark = SparkSession.builder.appName("contadorDePalavras").getOrCreate()
+
+df = spark.read.text("./README.md")
+
+palavras = df.select(explode(split(col("value"), r"[^\wÀ-ÿ]+")).alias("palavra"))
+
+df_limpo = palavras.select(lower(trim(col("palavra"))).alias("palavra")).filter(col("palavra") != "")
+
+df_limpo = df_limpo.filter(~col("palavra").rlike("^[0-9]+$"))
+
+contador = df_limpo.groupBy("palavra").count().orderBy(col("count").desc())
+
+contador.show(truncate=False)
