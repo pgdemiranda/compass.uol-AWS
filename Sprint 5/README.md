@@ -17,26 +17,67 @@ A *Sprint* 5 foi dividida em duas semanas, onde na primeira semana realizamos um
     - [Exercício 1: Apache Spark - Contador de Palavras](#exercício-1-apache-spark---contador-de-palavras)
     - [Exercício 2: TMDB](#exercício-2-tmdb)
 - [Evidências](#evidências)
+    - [Exercício 1: Apache Spark - Contador de Palavras](#apache-spark---contador-de-palavras)
+    - [Exercício 2: TMDB](#tmdb)
 - [Certificados](#certificados)
 
 # Desafio
 
 # Exercícios
-> **REVISAR ISSO AQUI** <-
 
-O Exercício 1 tem como objetivo desenvolver um job de processamento com o framework Spark por meio de um container Docker. Deve ser entregue o código desenvolvido. Para a sua resolução e execução aconteceu em 4 etapas: 1. realizar o *pull* da imagem jupyter/all-spark-notebook; 2. criar o container e ter acesso ao Jupyter Lab; 3. executar o pyspark à partir do contêiner; 4. usar o **Spark Shell** para contar a quantidade de ocorrências de cada palavra contida no arquivo README.md do nosso repositório no GitHub.
-
-O Exercício 2 tem como objetivo criar um processo de extração de dados da API do TMDB utilizando serviços da AWS. O exercício foi separado em duas tarefas: 1. a criação da conta para a obtenção de uma chave para realizar solicitações à API; 2. fazer as requisições utilizando uma estrutura de URL fornecida para o exercício.
-
-Os arquivos fornecidos para os exercícios, bem como as evidências que podem ser encontradas nas sub-pastas do diretório Exercícios. Abaixo fornecemos o caminho para cada exercício específico:
+Os entregáveis dos exercícios, bem como as evidências, podem ser encontradas nas sub-pastas do diretório [Exercícios](./Exercícios/). Ademais, fornecemos abaixo o caminho para cada exercício específico:
 
 ## [Exercício 1: Apache Spark - Contador de Palavras](./Exercícios/exercicio1-spark/)
 
+Abaixo se encontra a sequência de códigos utilizadas para a resolução do exercício 1 onde 1. realizamos o *pull* da imagem jupyter/all-spark-notebook; 2. criamos o container e obtivemos o acesso ao Jupyter Lab; 3. executamos o pyspark à partir do contêiner; 4. usamos o **Spark Shell** para contar a quantidade de ocorrências de cada palavra contida no arquivo README.md do nosso repositório no GitHub.
 
+- [solução do exercício 1 - exercicio1.txt](./Exercícios/exercicio1-spark/exercicio1.txt)
 
 ## [Exercício 2: TMDB](./Exercícios/exercicio2-tmdb/)
 
+A seguir disponibilizamos o script em Python utilizado para  criar um processo de extração de dados da API do TMDB. Aqui, o processo se desenrolou entre criar a nossa conta e fazer requisições com uma URL estruturada.
+
+- [solução do exercício 2 - exercicio2.py](./Exercícios/exercicio2-tmdb/exercicio2.py)
+
 # Evidências
+
+As evidências de cada exercício podem ser encontradoss nos subdiretórios de cada exercício na pasta Exercícios ou acessadas nos links abaixo:
+
+## [Apache Spark - Contador de Palavras](./Exercícios/exercicio1-spark/evidencias/)
+
+1. realizar o *pull* da imagem jupyter/all-spark-notebook; 2. criar o container e ter acesso ao Jupyter Lab; 3. executar o pyspark à partir do contêiner; 4. usar o **Spark Shell** para contar a quantidade de ocorrências de cada palavra contida no arquivo README.md do nosso repositório no GitHub.
+
+- Utilizamos o comando `docker pull jupyter/all-spark-notebook` para realizar o download da imagem requisitada como pode ser observado nas duas imagens abaixo:
+
+![evidencia1-pull_image](./Exercícios/exercicio1-spark/evidencias/evidencia1-pull_image.png)
+
+![evidencia2-pull_image2](./Exercícios/exercicio1-spark/evidencias/evidencia2-pull_image2.png)
+
+- Em seguida criamos o contêiner e expomos a porta **8888** `docker run -it -p 8888:8888 jupyter/all-spark-notebook`, utilizando as flags -it para interagir com o contêiner. A evidência abaixo demonstra o sucesso dessa operação:
+
+![evidencia3-jupyter](./Exercícios/exercicio1-spark/evidencias/evidencia3-jupyter.png)
+
+- Em outra aba do terminal, utilizamos o comando `docker ps` para descobrir o **ID** do contêiner que acabamos de criar e iniciamos o shell do **PySpark** interagindo com o contêiner utilizando o comando `docker exec -it ddcb4f1bb437 pyspark`, onde ddcb4f1bb437 corresponde ao **ID do contêiner**. Abaixo a amostra criada traz o sucesso da operação: 
+
+![evidencia4-pyspark](./Exercícios/exercicio1-spark/evidencias/evidencia4-pyspark.png)
+
+- Rascunhamos a solução em um notebook dentro do contêiner. Como o nosso repositório é privado, realizamos o download do arquivo com o comando `wget` junto ao nosso token de autenticação, que está devidamente ocultado nessa imagem por razões de segurança. A nosa sequência de códigos é simples: realizamos os imports do SparkSession e das funções que serão utilizadas: **explode** para visualizar melhor os valores, **split** para realizarmos as limpezas, **col** para nos ajudar nas filtragens com regex, **lower** e **trim** para normalizarmos os valores em minúsculas e eliminarmos espaços desnecessários. À partir daqui criamos a sessão, importamos o arquivo README.md, selecionamos as palavras (obedecendo nosso padrão linguístico, que deve incluir palavras acentuadas e cedilhas). Agrupamos a contagem das palavras por cada palavra e ordenamos elas de forma descendente. A evidência abaixo traz o sucesso do código: 
+
+![evidencia5-rascunho](./Exercícios/exercicio1-spark/evidencias/evidencia5-rascunho.png)
+
+- Por fim reproduzimos o código que havia sido rascunhado, diretamente no terminal, abaixo, nas próximas três amostragens, é possível observar que o resultado foi o mesmo que obtido anteriormente:
+
+![evidencia6-shell1](./Exercícios/exercicio1-spark/evidencias/evidencia6-shell1.png)
+
+![evidencia7-shell2](./Exercícios/exercicio1-spark/evidencias/evidencia7-shell2.png)
+
+![evidencia8-shell3_resultado](./Exercícios/exercicio1-spark/evidencias/evidencia8-shell3_resultado.png)
+
+## [TMDB](./Exercícios/exercicio2-tmdb/evidencias/)
+
+- Para resolver esse exercício rodamos um script Python que carrega nossa chave como variável de ambiente à partir de um arquivo **.env**, que costa também no arquivo **.gitignore** para que as credenciis não suba para nosso repositório remoto. Utilizamos o exemplo dado no exercício como template para a nossa requisição de filmes, e adicionamos um campo para realizar a requisição dos gêneros de filmes, o que se revelou um problema no início já que tivemos que obter requisições em separados para os gêneros (algo que poderia ser revisto em uma próxima iteração de um projeto como esse). Na amostra abaixo é possível observar que o código traz o resultado após rodar com sucesso:
+
+![evidencia1-retorno_API](./Exercícios/exercicio2-tmdb/evidencias/evidencia1-retorno_API.png)
 
 # Certificados
 Abaixo se encontram três certificados nominais a Pablo Miranda, todos relacionados aos cursos realizados na plataforma [AWS Skill Builder](https://explore.skillbuilder.aws/learn). Para essa *Sprint*, a conclusão dos cursos **Fundamentals of Analytics on AWS pt.1**, **Introduction to Amazon Athena** e **Serverless Analytics** resultaram no fornecimento dos certificados nominais: os certificados se encontram na pastda de [Certificados](./Certificados/) e podem ser acessado nos links abaixo: 
