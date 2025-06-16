@@ -1,0 +1,23 @@
+As questões para o relatório do projeto final estão atreladas à condição imposta ao Squad 2 do qual fazemos partes, que recebeu como tema de pesquisa os gêneros de "Crime e Guerra".
+Estamos interessados em estudar a produção de filmes de guerra durante o período da guerra fria, onde os Estados Unidos e a União Soviética podem ter alimentado suas indústrias nacionais de filmes com o interesse de solidificar suas ideologias através das telas, especialmente após o fim da segunda guerra mundial.
+
+Nossas questões são: 
+1. Nas décadas posteriores quais foram os gastos dos EUA e da ex-URSS em filmes de guerra?
+2. A cada década, quem recebeu os melhores votos médios por filme?
+3. Em termos de lucro, é possível mapear quem bloco lucrou mais?
+4. A Rússia consegiu manter uma produção de filmes nos mesmos parâmetros de qualidade da Ex-União Soviética?
+5. Quais foram os gastos realizados pela Ucrânia e Rússia, deflagrado o conflito entre eles?
+
+Para a etapa 2, essas foram as informações requisitadas com a API do TMDB estão listadas abaixo. Algumas delas se repetem, como vote_average:
+
+- movie_id,
+- imdb_id,
+- title,
+- original_title,
+- release_date,
+- vote_average,
+- vote_count,
+- budget,
+- revenue,
+- paises_codigo,
+- paises_nome.

@@ -23,6 +23,20 @@ A *Sprint* 5 foi dividida em duas semanas, onde na primeira semana realizamos um
 
 # Desafio
 
+O desafio dessa sprint se dividiu em duas estapas, ambas relacionadas a ingestão. Na primeira tivemos que realizar a ingestão de dois arquivos **CSV** para a camada RAW do nosso datalake, nosso bucket na S3. Para a segunda etapa, realizamos uma série de *requests* para a API do TMDB, referente a filmes do gênero Guerra e que têm como objetivo responder uma série de perguntas formuladas para ser respondidas nas etapas seguintes do Projeto Final. Essa segunda ingestão ocorreu à partir de uma Lambda e armazenou uma série de arquivos **Json** também na camada RAW do nosso datalake. Não houve maiores dificuldades na execução desse desafio, mas o limite de tempo de 15 minutos do Lambda mostrou ser um problema que foi resolvido utilizando a biblioteca `concurrent.futures` que nos ajudou a paralelizar essas chamadas obedecendo os limites impostos na documentação do TMDB e da AWS Lambda.
+
+O README.md, bem como os arquivos pertinentes ao Desafio se encontram na pasta [Desafio](./Desafio/)
+
+Todas as evidências do desafio se encontra na própria pasta de [Evidências](./Evidências/)
+
+- Paralelização na AWS Lambda: https://aws.amazon.com/blogs/compute/efficiently-processing-batched-data-using-parallelization-in-aws-lambda/
+
+- Escalonamento de processamento na AWS Lambda: https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html
+
+- Documentação da biblioteca nativa concurrent.future: https://docs.python.org/3/library/concurrent.futures.html 
+
+- Exemplo de uso de concurrent.future no Stac Overflow: https://stackoverflow.com/questions/58115437/concurrent-futures-in-aws-lambda-function-implementation
+
 # Exercícios
 
 Os entregáveis dos exercícios, bem como as evidências, podem ser encontradas nas sub-pastas do diretório [Exercícios](./Exercícios/). Ademais, fornecemos abaixo o caminho para cada exercício específico:
