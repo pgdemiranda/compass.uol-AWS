@@ -93,12 +93,14 @@ df = (
     spark.read.option("header", True)
     .option("inferSchema", True)
     .option("recursiveFileLookup", "true")
+    .option("delimiter", "|")
     .csv(source_file)
 )
 
 df.write.mode("overwrite").parquet(target_path)
 
 job.commit()
+
 
 ```
 

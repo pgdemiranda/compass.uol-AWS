@@ -22,6 +22,7 @@ df = (
     spark.read.option("header", True)
     .option("inferSchema", True)
     .option("recursiveFileLookup", "true")
+    .option("delimiter", "|")
     .csv(source_file)
 )
 
