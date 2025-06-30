@@ -1,4 +1,4 @@
-# Desafio da Sprint 2 - Análise de Dados
+# Desafio da Sprint 6
 
 O objetivo é praticar a combinação de conhecimentos vistos no Programa, fazer um mix de tudo que já foi feito. Para essa Sprint realizamos o processamento dos dados na camada **Trusted**, uma camada do data lake que corresponde àquela em que os dados estão limpos e são confiáveis, sendo o resultado da integração das diversas fontes de origem, que estão na camada anterior, que chamamos de **Raw**.
 
