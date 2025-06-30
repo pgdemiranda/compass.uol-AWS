@@ -1,23 +1,38 @@
 # Resumo da Sprint 6
 
-Como de praxe, a *Sprint* 6 foi dividida em duas semanas, onde na primeira realizamos dois cursos visando complementar nosso entendimento nos serviços básicos na AWS, em especial serviços e arquiteturas voltadas para dados, e um curso voltado para 
+Como de praxe, a *Sprint* 6 foi dividida em duas semanas, onde na primeira realizamos dois cursos visando complementar nosso entendimento nos serviços básicos na AWS, em especial serviços e arquiteturas voltadas para dados, e um curso voltado para o uso específico do serviço AWS Glue, complementado por uma playlist salva no youtube com todo um processo completo de processamento de dados usando esse serviço. Esses foram os cursos e uma breve descrição de seu conteúdo:
 
+- **Fundamentals of Analytics on AWS pt.2**: continuando a primeira parte realizada na *Sprint* passada, nessa segunda parte estudamos diferentes arquiteturas e soluções para dados, especialmente *data warehouses*, *data lakes* e *data lakehouses* e os serviços que estão diretamente integrados a essas arquiteturas, como AWS Glue, AWS Athena, AWS Data Lake Formation, AWS Redshift, e soluções para *streaming* de dados, como AWS MKS, AWS Firehose, etc.
 
-- **Fundamentals of Analytics on AWS pt.2** e 
+- **AWS Glue Getting Started**: esse foi um curso especialmente focado em diferentes atividades que podem ser realizadas com AWS Glue e as soluções que esse serviço oferece: movimentação de dados com jobs realizados com notebooks ou ferramentas visuais, criação de catálogos de dados, crawlers, integrações com AWS Athena.
 
-- **AWS Glue Getting Started** 
+- **AWS Tutoriais Técnicos - Analytics**: essa foi uma playlist prática mostrando como construir jobs e rodar os serviços do AWS Glue. Curiosamente, esse curso, realizado em formato de playlist no YouTube, teve sinergia com o laboratório realizado durante os exercícios. Durante o curso aprendemos a realizar um ETL usando notebook no AWS Glue e o exame desses dados através do AWS Athena.
 
+> Essa foi uma *Sprint* muito interessante pois nós interagimos diretamente com a orquestração de dados através da AWS Glue. Foi reforçado os usos de diferentes componentes desse serviço e fomos encorajados a escrever nosso próprio código para realizar os jobs que movimentasse os dados entre camadas. Sair de AWS Lambda para AWS Glue mantendo o foco no código foi uma experiência cuja a maior dificuldade esteve em adaptar o nosso objetivo à nossa capacidade de programar com Spark.
 
 # Sumário
 
 - [Desafio](#desafio)
+
 - [Exercícios](#exercícios)
+
 - [Evidências](#evidências)
+
 - [Certificados](#certificados)
 
 # Desafio
 
-O README.md, bem como os arquivos pertinentes ao Desafio se encontram na pasta [Desafio](./Desafio/)
+O desafio nessa *Sprint* se dividiu em duas partes, em ambas extraímos os dados da camada *RAW*, convertemos os dados ao formato `.parquet` e salvamos os dados na nova camada *TRUSTED*. Na primeira parte fizemos exatamente essa extração do arquivo de filmes `movies.csv`, e salvamos o arquivo na camada *TRUSTED* observando a indicação para o *path*. Na segunda parte do desafio precisamos passar os múltiplos arquivos `.json` para essa nova camada, respeitando a data original de ingestão, o que foi possível fazer com spark diretamente no *AWS Glue*. No fim, os dados na nova camada podem ser examinados utilizando o *AWS Athena* após a catalogação desses dados com a ajuda de *crawlers*.
+
+Para o desafio, a maior dificuldade foi como mapear o *path*, o que fizemos com as funções `input_file_name` e depois uma filtragem com expressões regulares utilizando a função `regexp_extract` para separar o ano, mês e dia e salvar os arquivos na camada *TRUSTED* particionados por esses parâmetros. Abaixo consta o material que foi consultado:
+
+- https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.functions.input_file_name.html
+
+- https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.functions.regexp_extract.html
+
+- https://stackoverflow.com/questions/68636456/read-file-in-a-folder-using-regex-expression-in-pyspark
+
+O README.md, bem como os arquivos pertinentes ao Desafio se encontram no diretório [Desafio](./Desafio/)
 
 Todas as evidências do desafio se encontra na própria pasta de [Evidências](./Evidências/)
 
