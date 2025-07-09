@@ -42,9 +42,9 @@ output_path = args["S3_TARGET_FATO_PATH"]
 
 schema = StructType(
     [
-        StructField("id_filme", IntegerType(), False),  # PK
-        StructField("id_imdb", StringType(), True),  # SK
-        StructField("data", DateType(), True),  # SK
+        StructField("id_filme", IntegerType(), False),
+        StructField("id_imdb", StringType(), True),
+        StructField("data", DateType(), True),
         StructField("votos_tmdb", IntegerType(), True),
         StructField("media_tmdb", DoubleType(), True),
         StructField("total_votos_imdb", IntegerType(), True),
@@ -110,9 +110,10 @@ fato_filmes = (
         F.col("base.data_col") == F.col("dd.data"),
         "inner"
     )
+    .withColumn("codigo_pais_exploded", F.explode(F.col("base.paises_codigo_array")))
     .join(
-        dim_paises.select("id_pais", "paises_codigo_array").alias("dp"),
-        F.arrays_overlap(F.col("base.paises_codigo_array"), F.col("dp.paises_codigo_array")),
+        dim_paises.select("id_pais", "codigo_pais").alias("dp"),
+        F.col("codigo_pais_exploded") == F.col("dp.codigo_pais"),
         "inner"
     )
     .groupBy(
@@ -152,12 +153,12 @@ fato_filmes = (
         F.col("decada"),
         F.col("periodo_historico")
     )
-    .filter(F.col("id_bloco") != 5)
+    .filter((F.col("id_bloco") != 5) & ((F.col("ano") < 1993) | (F.col("ano") > 2013)))
     .distinct()
 )
 
 fato_filmes = spark.createDataFrame(fato_filmes.rdd, schema)
 
-fato_filmes.write.mode("overwrite").parquet(output_path)
+fato_filmes.write.mode("overwrite").partitionBy("bloco_historico").parquet(output_path)
 
 job.commit()
