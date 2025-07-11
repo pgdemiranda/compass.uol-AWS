@@ -6,7 +6,6 @@ from awsglue.utils import getResolvedOptions
 from pyspark import SparkContext
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
-    ArrayType,
     IntegerType,
     StringType,
     StructField,
@@ -39,15 +38,11 @@ schema = StructType(
 df = spark.read.option("recursiveFileLookup", "true").parquet(input_path)
 
 df = (
-    df.withColumn(
-        "paises_codigo_array", F.split(F.col("paises_codigo"), ",\s*")
-    )
-    .withColumn(
-        "paises_nome_array", F.split(F.col("paises_nome"), ",\s*")
-    )
+    df.withColumn("paises_codigo_array", F.split(F.col("paises_codigo"), ",\s*"))
+    .withColumn("paises_nome_array", F.split(F.col("paises_nome"), ",\s*"))
     .select(
         F.posexplode(F.col("paises_codigo_array")).alias("pos", "codigo_pais"),
-        F.col("paises_nome_array")
+        F.col("paises_nome_array"),
     )
     .withColumn("nome_pais", F.col("paises_nome_array")[F.col("pos")])
     .select("codigo_pais", "nome_pais")

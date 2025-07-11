@@ -1,0 +1,61 @@
+-- Tabela: dim_filmes
+CREATE TABLE dim_filmes (
+    id_imdb TEXT PRIMARY KEY,
+    titulo_principal TEXT,
+    titulo_original TEXT,
+    ano_lancamento INTEGER,
+    duracao_minutos INTEGER,
+    nota_media_imdb REAL,
+    total_votos_imdb INTEGER,
+    media_tmdb REAL,
+    votos_tmdb INTEGER,
+    orcamento REAL,
+    receita REAL,
+    lucro REAL
+);
+
+-- Tabela: dim_pais
+CREATE TABLE dim_pais (
+    id_pais INTEGER PRIMARY KEY,
+    codigo_pais TEXT,
+    nome_pais TEXT
+);
+
+-- Tabela: dim_data
+CREATE TABLE dim_data (
+    data TEXT PRIMARY KEY,
+    ano INTEGER,
+    mes INTEGER,
+    dia INTEGER,
+    trimestre INTEGER,
+    semestre INTEGER,
+    dia_semana INTEGER,
+    dia_ano INTEGER,
+    fim_semana BOOLEAN,
+    decada INTEGER,
+    periodo_historico TEXT
+);
+
+-- Tabela: fato_filmes_p_bloco
+CREATE TABLE fato_filmes_p_bloco (
+    id_filme INTEGER PRIMARY KEY,
+    id_imdb TEXT,
+    id_pais INTEGER,
+    data TEXT,
+    votos_tmdb INTEGER,
+    media_tmdb REAL,
+    total_votos_imdb INTEGER,
+    nota_media_imdb REAL,
+    orcamento REAL,
+    recebimento REAL,
+    lucro REAL,
+    id_bloco TEXT,
+    bloco_historico TEXT,
+    ano INTEGER,
+    mes INTEGER,
+    decada TEXT,
+    periodo_historico TEXT,
+    FOREIGN KEY (id_imdb) REFERENCES dim_filmes (id_imdb),
+    FOREIGN KEY (id_pais) REFERENCES dim_pais (id_pais),
+    FOREIGN KEY (data) REFERENCES dim_data (data)
+);

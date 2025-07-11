@@ -44,6 +44,7 @@ schema = StructType(
     [
         StructField("id_filme", IntegerType(), False),
         StructField("id_imdb", StringType(), True),
+        StructField("id_pais", ArrayType(IntegerType()), True),
         StructField("data", DateType(), True),
         StructField("votos_tmdb", IntegerType(), True),
         StructField("media_tmdb", DoubleType(), True),
@@ -68,28 +69,26 @@ dim_datas = spark.read.parquet(dim_datas_path)
 df = spark.read.option("recursiveFileLookup", "true").parquet(input_trusted_path)
 
 fato_filmes = (
-    df.withColumn("paises_codigo_array", F.sort_array(F.split(F.col("paises_codigo"), ",\s*")))
+    df.withColumn(
+        "paises_codigo_array", F.sort_array(F.split(F.col("paises_codigo"), ",\s*"))
+    )
     .withColumn("data_col", F.to_date(F.col("lancamento"), "yyyy-MM-dd"))
     .withColumn("ano_lancamento", F.year(F.col("data_col")))
     .withColumn(
         "bloco_historico",
         F.when(
-            (F.array_contains(F.col("paises_codigo_array"), "US")) & (F.col("ano_lancamento") < 1993),
-            "ocidental"
+            (F.array_contains(F.col("paises_codigo_array"), "US"))
+            & (F.col("ano_lancamento") < 1993),
+            "ocidental",
         )
+        .when(F.array_contains(F.col("paises_codigo_array"), "SU"), "sovietico")
         .when(
-            F.array_contains(F.col("paises_codigo_array"), "SU"),
-            "sovietico"
+            (F.array_contains(F.col("paises_codigo_array"), "RU"))
+            & (F.col("ano_lancamento") > 2012),
+            "russia",
         )
-        .when(
-            (F.array_contains(F.col("paises_codigo_array"), "RU")) & (F.col("ano_lancamento") > 2012),
-            "russia"
-        )
-        .when(
-            F.array_contains(F.col("paises_codigo_array"), "UA"),
-            "ucrania"
-        )
-        .otherwise("outros")
+        .when(F.array_contains(F.col("paises_codigo_array"), "UA"), "ucrania")
+        .otherwise("outros"),
     )
     .withColumn(
         "id_bloco",
@@ -97,24 +96,35 @@ fato_filmes = (
         .when(F.col("bloco_historico") == "sovietico", 2)
         .when(F.col("bloco_historico") == "russia", 3)
         .when(F.col("bloco_historico") == "ucrania", 4)
-        .otherwise(5)
+        .otherwise(5),
     )
     .alias("base")
     .join(
-        dim_filmes.select("id_imdb", "votos_tmdb", "media_tmdb", "total_votos_imdb", "nota_media_imdb", "orcamento", "receita", "lucro").alias("df"),
+        dim_filmes.select(
+            "id_imdb",
+            "votos_tmdb",
+            "media_tmdb",
+            "total_votos_imdb",
+            "nota_media_imdb",
+            "orcamento",
+            "receita",
+            "lucro",
+        ).alias("df"),
         "id_imdb",
-        "inner"
+        "inner",
     )
     .join(
-        dim_datas.select("data", "ano", "mes", "decada", "periodo_historico").alias("dd"),
+        dim_datas.select("data", "ano", "mes", "decada", "periodo_historico").alias(
+            "dd"
+        ),
         F.col("base.data_col") == F.col("dd.data"),
-        "inner"
+        "inner",
     )
     .withColumn("codigo_pais_exploded", F.explode(F.col("base.paises_codigo_array")))
     .join(
         dim_paises.select("id_pais", "codigo_pais").alias("dp"),
         F.col("codigo_pais_exploded") == F.col("dp.codigo_pais"),
-        "inner"
+        "inner",
     )
     .groupBy(
         F.col("base.id_imdb"),
@@ -131,13 +141,14 @@ fato_filmes = (
         F.col("dd.ano"),
         F.col("dd.mes"),
         F.col("dd.decada"),
-        F.col("dd.periodo_historico")
+        F.col("dd.periodo_historico"),
     )
     .agg(F.collect_set(F.col("dp.id_pais")).alias("id_pais_array"))
     .withColumn("id_filme", F.row_number().over(Window.orderBy("id_imdb")))
     .select(
         "id_filme",
         F.col("id_imdb"),
+        F.col("id_pais_array").alias("id_pais"),
         F.col("data_col").alias("data"),
         F.col("votos_tmdb").cast(IntegerType()),
         F.col("media_tmdb").cast(DoubleType()),
@@ -151,7 +162,7 @@ fato_filmes = (
         F.col("ano"),
         F.col("mes"),
         F.col("decada"),
-        F.col("periodo_historico")
+        F.col("periodo_historico"),
     )
     .filter((F.col("id_bloco") != 5) & ((F.col("ano") < 1993) | (F.col("ano") > 2013)))
     .distinct()
