@@ -232,11 +232,37 @@ Fizemos uma pequena concessão de escolha monocromática no **Accent Foreground*
 
 ## Apresentação Final
 
+Elencamos 5 questões finais para o nosso dashboard, reorganizadas à partir das questões formuladas no início do desafio final. São elas:
+
+1. Qual a nota média dos filmes de guerra soviéticos? & 2. A Rússia conseguiu manter essa média histórica?
+No topo do nosso *dashboard* encontramos dois KPI's que mostram a diferença nas notas médias entre os dois blocos históricos. As notas médias são percepções públicas sobre a qualidade desses filmes, e as KPI's trazem, no centro, as diferenças percentuais entre as notas médias dos blocos históricos em diferentes momentos. Os blocos históricos do período da Guerra Fria trazem uma diferença percentual de 8,14% com médias muito parecidas, contudo os blocos históricos do período anterior a guerra Rússia x Ucrânia trazem uma diferença percentual de 18,49%, com médias muito favoráveis à Ucrânia (vamos ver que o gasto desse país com filmes de Guerra também foram maiores apesar de menos produções). 
+> Portanto, concluímos que a ex-URSS mantém uma média de notas acima do bloco histórico competidor no momento da Guerra-fria, apesar das médias serém próximas, enquanto a nota média dos filmes produzidos pela Rússia é consideravelmente abaixo da sua competidora, a Ucrânia. 
+
+Abaixo é possível observar a capa do dashboard e as KPI's mencionadas:
+
 ![7-dashboard_capa_kpis](../Evidências/7-dashboard_capa_kpis.png)
+
+3. Qual a média de votos recebidos por Bloco Histórico por década durante a Guerra Fria?
+Logo após os cards com KPI's, há dois gráficos em barras que diz respeito a blocos históricos durante a Guerra Fria, um mostra a quantidade de filmes produzidos pelo bloco soviete e pelo bloco ocidente, e o outro a média de votos recebidos por bloco em uma determinada década. Apesar do bloco ocidente ter produzido mais filmes, e, por consequência, mais votos, as maiores médias de votos são de filmes realizados nas décadas de 70 e 80. A baixa quantidade de média de votos no bloco soviete pode indicar que essas são produções que atendem a um nicho específico de audiência. 
+> O bloco ocidente, capitaneado pelos Estados Unidos foi campeão indisputável nas 6 décadas analisadas, incluindo um crescimento acentuado nas décadas de 1970 e 1980. Além dos filmes soviéticos serem parte, hoje, de um nicho cultural, é possível que a popularidade desses filmes se deva ao fato de que a distribuição dos filmes ocidentais, incluindo a popularização de formatos como o VHS tenha ajudado na divulgação desses filmes que podem ser, ainda hoje, populares.
+
+Os gráficos em barras podem ser examinados na evidência abaixo:
 
 ![8-dashboard_barras](../Evidências/8-dashboard_barras.png)
 
+4. Qual foi o comportamento das produções de filmes na Guerra Fria na segunda metade do século? 
+Em seguida temos um gráfico em linhas que mostram a quantidade de filmes produzidos por bloco histórico durante a Guerra Fria. A razão pelo alongamento do card se dá pela necessidade de trazer mais espaço entre os elementos, já que um card menor pode fazer com que o gráfico seja confuso, mesmo com uma granularidade menor como a selecionada (são filmes por ano).  
+> Existe uma queda nas produções de ambos os blocos no momento posterior ao fim da Segunda Guerra Mundial, e uma acentuada recuperação nas produções do bloco ocidente, situação que se inverte durante a Crise dos Misseis Cubanos, momento em que o bloco soviete atinge o ápice nas produções de filme de guerra. Curiosamente, as décadas de 70 e 80, momentos em que vimos no gráfico em barras passado ser os mais populares em termos de quantidade de votos, representa uma baixa na produção do bloco ocidente, com um aumento gradual no número de produção, o que pode ser interpretado como um aumento na qualidade desses lançamentos, apesar da baixa produção.
+
+O gráfico em linha pode ser examinado na evidência à seguir:
+
 ![9-dashboard_linhas](../Evidências/9-dashboard_linhas.png)
+
+5. Por fim, nos anos anteriores ao início da Guerra Rússia e Ucrânia, o gasto orçamentário Ucraniano supera o Russo?
+Confrontamos as produções desses blocos históricos com os gráficos das produções dos blocos históricos russo e ucraniano, no contexto dos anos anteriores à Invasão da Ucrânia e Guerra entre Rússia e Ucrânia. Anteriormente o KPI havia nos informado que a Ucrânia detém uma nota média de filmes de guerra consideravelmente maior que o da Rússia, e com os novos gráficos ficamos sabendo também que a Rússia produziu mais que o dobro de filmes da Ucrânia e o gasto orçamentário também traz uma diferença significativa. 
+> Para examinarmos o gráfico em área devemos prestar atenção ao espaço ocupado por cada um dos blocos, onde os gastos orçamentários da Rússia com filmes de guerra são quase sempre maiores que o da Ucrânia, **exceto** em 2017 e 2019, provavelmente seguindo o aumento das tensões e da guerra civil em torno da região do Donbass, e da ocupação das tropas russas das fronteiras poucos anos depois. 
+
+Ambos os gráficos podem ser examinados na evidência abaixo:
 
 ![10-dashboard_barras_area](../Evidências/10-dashboard_barras_area.png)
 
