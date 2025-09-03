@@ -3,11 +3,11 @@
 </div>
 <h1 align="center">Apresentação</h1>
 
-Saudações. Me chamo **Pablo Gomes de Miranda** e esse é o meu repositório com as informações de toda a minha trajetória no **programa de bolsas da Compass UOL, trilha de Engenharia de Dados** contendo exercícios, desafios e informações das sprints. 
+Olá. Me chamo **Pablo Gomes de Miranda** e esse é o meu repositório com as informações de toda a minha trajetória no **programa de bolsas da Compass UOL, trilha de Engenharia de Dados** contendo exercícios, desafios e informações das sprints. 
 
 Mais informações sobre mim:
 - Resido em **João Pessoa, Paraíba**;
-- Estou vinculado ao **MBA em Engenharia e Ciência de Dados da UNIESP**, mas também curso o tecnólogo de **Ciência de Dados da Estácio de Sá** (4o semestre de 5). Possuo graduação e mestrado em História (UFPB e UFRN, respectivamente) e doutorado em Ciências das Religiões (UFPB) com doutorado sanduíche pela Universidade da Islância (Háskóli Íslands);
+- Estou vinculado ao **MBA em Engenharia e Ciência de Dados da UNIESP**, mas também curso o tecnólogo de **Ciência de Dados da Estácio de Sá** (4o semestre de 5). Possuo graduação e mestrado em História (UFPB e UFRN, respectivamente) e doutorado em Ciências das Religiões (UFPB) com doutorado sanduíche pela Universidade da Islândia (Háskóli Íslands);
 
 ## Sprints 
 1. [Sprint 1](/Sprint%201/README.md)
